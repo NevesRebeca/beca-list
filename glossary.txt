@@ -1,0 +1,25 @@
+Ritual: xampp -> apache, mySQL -> http://localhost/phpmyadmin; beca-list; npm run dev; http://localhost:3000/ping; 
+
+cors: app.use(cors()) — ativa o CORS para todas as rotas. Isso permite que seu backend seja chamado por um frontend rodando em outra origem (outro domínio/porta), senão o navegador bloquearia essas requisições por segurança. Middleware. Estreiando;
+
+express: o framework que cria e gerencia o servidor web. Já usei no meu último projeto. facilita a criação de rotas sem ter que lidar com detalhes complexos de rede;
+
+npm: já usei também. Vem junto com o Node. É o gerenciador de pacotes/bibliotecas prontas — em vez de escrever do zero um jeito de conectar no banco, alguém já escreveu essa lógica e publicou como um pacote que a gente só instala e usa. npm init -y criou o package.json (a "ficha de identidade" do projeto: nome, dependências, scripts). npm install X baixa o pacote X para dentro de node_modules/;
+
+dotenv: lê o arquivo .env e transforma cada linha dele em variável disponível no código (process.env.DB_NAME, por exemplo). Serve para manter informação sensível (senha do banco) fora do código-fonte que vai pro GitHub. Usei também, já conheço;
+
+mysql2: o "tradutor" que sabe efetivamente conversar com um banco MySQL (protocolo de rede, autenticação, etc). Sozinho é meio complicado de usar direto. Nunca usei.
+
+sequelize: primeira vez usando, ele é um ORM (Object-Relational Mapper). Ele usa o mysql2 por baixo, mas te deixa trabalhar com o banco escrevendo JavaScript em vez de SQL puro. Você consegue criar as tabelas automaticamente a partir dos seus models;
+
+nodemon (só desenvolvimento): fica de olho nos arquivos do projeto e reinicia o servidor sozinho toda vez que você salva algo. Sem ele, você teria que parar (Ctrl+C) e rodar node server.js de novo a cada alteração. Já usei.
+
+app.js: configura o Express: middlewares (cors, json) e rotas;
+
+.env: credenciais do banco (nunca vai pro Git);
+
+.gitignore: diz ao Git pra ignorar node_modules/ e .env;
+
+package.json: ficha do projeto + lista de dependências + scripts;
+
+server.js: "liga" o servidor de fato;
