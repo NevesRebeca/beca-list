@@ -1,4 +1,4 @@
-Ritual: xampp -> apache, mySQL -> http://localhost/phpmyadmin; beca-list; npm run dev; http://localhost:3000/ping; 
+Ritual: xampp -> apache, mySQL -> http://localhost/phpmyadmin; beca-list; npm run dev (em backend); http://localhost:3000/ping; 
 
 cors: app.use(cors()) — ativa o CORS para todas as rotas. Isso permite que seu backend seja chamado por um frontend rodando em outra origem (outro domínio/porta), senão o navegador bloquearia essas requisições por segurança. Middleware. Estreiando;
 
@@ -23,3 +23,9 @@ app.js: configura o Express: middlewares (cors, json) e rotas;
 package.json: ficha do projeto + lista de dependências + scripts;
 
 server.js: "liga" o servidor de fato;
+
+api.js: só sabe conversar com o backend. Não sabe nada sobre <div>, id, tela. Só recebe pedidos ("me dá as tarefas", "cria essa tarefa") e devolve dados;
+
+ui.js: só sabe mexer no HTML/DOM. Não sabe nada sobre fetch, URLs, backend. Recebe dados prontos e só decide "como colocar isso na tela";
+
+main.js: é o "maestro", importa o api.js e o ui.js, e conecta os dois — chama a função do api, pega o resultado, manda para a função do ui mostrar.

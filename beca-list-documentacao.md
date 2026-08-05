@@ -31,25 +31,25 @@ O frontend consome a API do backend, que por sua vez se conecta ao banco de dado
 
 O sistema deve permitir o **CRUD completo** de tarefas:
 
-| Ação | Descrição |
-|---|---|
-| Criar | Cadastrar uma nova tarefa |
-| Listar | Ver todas as tarefas, com paginação, busca por título e filtros por categoria |
-| Editar | Atualizar dados de uma tarefa existente |
-| Excluir | Remover uma tarefa |
-| Concluir | Marcar/desmarcar tarefa como concluída (checkbox) |
+| Ação     | Descrição                                                                     |
+| -------- | ----------------------------------------------------------------------------- |
+| Criar    | Cadastrar uma nova tarefa                                                     |
+| Listar   | Ver todas as tarefas, com paginação, busca por título e filtros por categoria |
+| Editar   | Atualizar dados de uma tarefa existente                                       |
+| Excluir  | Remover uma tarefa                                                            |
+| Concluir | Marcar/desmarcar tarefa como concluída (checkbox)                             |
 
 ### Campos de uma tarefa
 
-| Campo | Tipo sugerido | Obrigatório | Observações |
-|---|---|---|---|
-| `id` | INTEGER (PK, auto increment) | Automático | Gerado pelo Sequelize |
-| `title` | STRING | Sim | Título da tarefa |
-| `description` | TEXT | Não | Descrição detalhada |
-| `priority` | ENUM (`baixa`, `media`, `alta`) | Sim | Padrão `media` |
-| `due_date` | DATE | Não | Data em que a tarefa deve ser executada |
-| `completed` | BOOLEAN | Sim | Padrão `false` |
-| `createdAt` / `updatedAt` | DATE | Automático | Gerenciados pelo Sequelize (`timestamps: true`) |
+| Campo                     | Tipo sugerido                   | Obrigatório | Observações                                     |
+| ------------------------- | ------------------------------- | ----------- | ----------------------------------------------- |
+| `id`                      | INTEGER (PK, auto increment)    | Automático  | Gerado pelo Sequelize                           |
+| `title`                   | STRING                          | Sim         | Título da tarefa                                |
+| `description`             | TEXT                            | Não         | Descrição detalhada                             |
+| `priority`                | ENUM (`baixa`, `media`, `alta`) | Sim         | Padrão `media`                                  |
+| `due_date`                | DATE                            | Não         | Data em que a tarefa deve ser executada         |
+| `completed`               | BOOLEAN                         | Sim         | Padrão `false`                                  |
+| `createdAt` / `updatedAt` | DATE                            | Automático  | Gerenciados pelo Sequelize (`timestamps: true`) |
 
 > 💡 A ordenação padrão da listagem deve ser pela mais recente primeiro (`createdAt DESC`).
 
@@ -63,15 +63,16 @@ O sistema deve permitir o **CRUD completo** de tarefas:
 
 Exemplos:
 
-| Em vez de... | Use... |
-|---|---|
-| `listaDeTarefas` | `taskList` |
-| `buscarTarefas()` | `fetchTasks()` |
-| `estaCarregando` | `isLoading` |
-| `aoEnviarFormulario()` | `handleSubmit()` |
-| `dataDeExecucao` | `dueDate` / `due_date` (coluna no banco) |
+| Em vez de...           | Use...                                   |
+| ---------------------- | ---------------------------------------- |
+| `listaDeTarefas`       | `taskList`                               |
+| `buscarTarefas()`      | `fetchTasks()`                           |
+| `estaCarregando`       | `isLoading`                              |
+| `aoEnviarFormulario()` | `handleSubmit()`                         |
+| `dataDeExecucao`       | `dueDate` / `due_date` (coluna no banco) |
 
 Convenção sugerida de nomenclatura:
+
 - **camelCase** para variáveis e funções JavaScript (`taskList`, `fetchTasks`)
 - **PascalCase** para models/classes (`Task`)
 - **snake_case** para colunas do banco (`due_date`, `created_at`), se preferir seguir a convenção comum do SQL — ou `camelCase`, se preferir deixar o Sequelize converter automaticamente. O importante é manter consistência ao longo do projeto.
@@ -81,11 +82,13 @@ Convenção sugerida de nomenclatura:
 ## 5. Frontend
 
 ### Tecnologias
+
 - **HTML, CSS e JavaScript puro** (sem frameworks como React/Vue)
 - **Tailwind CSS via CDN** para estilização
 - Abordagem **mobile first**: construa o layout pensando em telas pequenas primeiro e depois use os prefixos responsivos do Tailwind (`sm:`, `md:`, `lg:`) para telas maiores.
 
 ### Tailwind via CDN
+
 Adicione no `<head>` do HTML (script oficial do Play CDN):
 
 ```html
@@ -113,6 +116,7 @@ frontend/
 ```
 
 ### Loading nas chamadas ao backend
+
 Toda chamada `fetch()` ao backend deve exibir um indicador de carregamento (ex: um spinner ou texto "Carregando..."), e escondê-lo quando a resposta chegar. Um padrão simples:
 
 ```js
@@ -131,6 +135,7 @@ async function fetchTasks() {
 ```
 
 ### Busca com debounce
+
 Ao digitar na barra de pesquisa, a busca deve ocorrer por título, mas **sem disparar uma requisição a cada tecla digitada**. Use a técnica de **debounce**: espera um pequeno intervalo (ex: 300-500ms) após o usuário parar de digitar antes de buscar.
 
 ```js
@@ -143,9 +148,12 @@ function debounce(fn, delay = 400) {
 }
 
 const searchInput = document.getElementById("search");
-searchInput.addEventListener("input", debounce((e) => {
-  fetchTasks({ search: e.target.value });
-}, 400));
+searchInput.addEventListener(
+  "input",
+  debounce((e) => {
+    fetchTasks({ search: e.target.value });
+  }, 400),
+);
 ```
 
 ---
@@ -156,16 +164,16 @@ searchInput.addEventListener("input", debounce((e) => {
 
 O sistema é monocromático: um acento (vermelho/laranja) sobre uma rampa neutra escura.
 
-| Token | Hex | Uso |
-|---|---|---|
-| `--color-bg` | `#201E1D` | Fundo geral da aplicação |
-| `--color-surface` | `#2D2B2B` | Fundo de cards/linhas de tarefa |
-| `--color-text` | `#F3F2F2` | Texto principal |
-| `--color-divider` | `#605D5D` | Linhas divisórias |
-| `--color-accent` (ação) | `#EC3013` | Cor de ação primária |
-| `--color-accent-500` | `#FF563C` | Prioridade alta |
-| `--color-accent-300` | `#FFC4B8` | Prioridade média |
-| `--color-neutral-400` | `#BAB6B6` | Prioridade baixa |
+| Token                   | Hex       | Uso                             |
+| ----------------------- | --------- | ------------------------------- |
+| `--color-bg`            | `#201E1D` | Fundo geral da aplicação        |
+| `--color-surface`       | `#2D2B2B` | Fundo de cards/linhas de tarefa |
+| `--color-text`          | `#F3F2F2` | Texto principal                 |
+| `--color-divider`       | `#605D5D` | Linhas divisórias               |
+| `--color-accent` (ação) | `#EC3013` | Cor de ação primária            |
+| `--color-accent-500`    | `#FF563C` | Prioridade alta                 |
+| `--color-accent-300`    | `#FFC4B8` | Prioridade média                |
+| `--color-neutral-400`   | `#BAB6B6` | Prioridade baixa                |
 
 **Regra de uso:** o vermelho aparece em só três lugares — ação primária (Nova tarefa, Salvar, Excluir confirmado), sinal de atraso e prioridade alta. Todo o resto é "tinta sobre fundo" (texto/ícones neutros).
 
@@ -177,24 +185,42 @@ Registro dessas cores no Tailwind via CDN:
     theme: {
       extend: {
         colors: {
-          bg: '#201E1D',
-          surface: '#2D2B2B',
-          text: '#F3F2F2',
-          divider: '#605D5D',
+          bg: "#201E1D",
+          surface: "#2D2B2B",
+          text: "#F3F2F2",
+          divider: "#605D5D",
           accent: {
-            DEFAULT: '#EC3013',
-            500: '#FF563C', // prioridade alta
-            300: '#FFC4B8', // prioridade média
+            DEFAULT: "#EC3013",
+            500: "#FF563C", // prioridade alta
+            300: "#FFC4B8", // prioridade média
           },
           neutral: {
-            400: '#BAB6B6', // prioridade baixa
+            400: "#BAB6B6", // prioridade baixa
           },
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  };
 </script>
 ```
+
+### No Tailwind v4
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-bg: #201E1D;
+    --color-surface: #2D2B2B;
+    --color-text: #F3F2F2;
+    --color-divider: #605D5D;
+
+    --color-accent: #EC3013;
+    --color-accent-500: #FF563C; /* prioridade alta */
+    --color-accent-300: #FFC4B8; /* prioridade média */
+
+    --color-neutral-400: #BAB6B6; /* prioridade baixa */
+  }
+</style>
 
 ### Componentes da tela de listagem
 
@@ -223,7 +249,9 @@ Uma tarefa é considerada atrasada quando a `due_date` é anterior à data atual
 
 ```js
 function isOverdue(task) {
-  return !task.completed && new Date(task.due_date) < new Date().setHours(0, 0, 0, 0);
+  return (
+    !task.completed && new Date(task.due_date) < new Date().setHours(0, 0, 0, 0)
+  );
 }
 ```
 
@@ -245,6 +273,7 @@ A listagem tem filtros por categoria — **Todas / Hoje / Prioridade alta / Conc
 ## 7. Backend
 
 ### Tecnologias
+
 - **Node.js** (instale a versão LTS mais recente disponível — no momento em que este documento foi escrito, a linha ativa é a Node 24.x LTS, mas confira sempre a versão LTS mais recente no site oficial)
 - **Express** para criação da API REST
 - **Sequelize** como ORM, conectado ao **MySQL**
@@ -274,15 +303,16 @@ backend/
 
 ### Endpoints sugeridos (API REST)
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `GET` | `/tasks?page=1&limit=10&search=texto` | Lista tarefas com paginação, busca por título e filtros por categoria |
-| `GET` | `/tasks/:id` | Busca uma tarefa específica |
-| `POST` | `/tasks` | Cria uma nova tarefa |
-| `PUT` | `/tasks/:id` | Atualiza uma tarefa (inclusive marcar como concluída) |
-| `DELETE` | `/tasks/:id` | Remove uma tarefa |
+| Método   | Rota                                  | Descrição                                                             |
+| -------- | ------------------------------------- | --------------------------------------------------------------------- |
+| `GET`    | `/tasks?page=1&limit=10&search=texto` | Lista tarefas com paginação, busca por título e filtros por categoria |
+| `GET`    | `/tasks/:id`                          | Busca uma tarefa específica                                           |
+| `POST`   | `/tasks`                              | Cria uma nova tarefa                                                  |
+| `PUT`    | `/tasks/:id`                          | Atualiza uma tarefa (inclusive marcar como concluída)                 |
+| `DELETE` | `/tasks/:id`                          | Remove uma tarefa                                                     |
 
 ### Paginação
+
 O backend deve aceitar os parâmetros `page` e `limit` via query string e tratá-los internamente usando `limit` e `offset` do Sequelize:
 
 ```js
@@ -324,17 +354,23 @@ const tasks = await Task.findAndCountAll({
 Existem três abordagens comuns para começar um projeto fullstack. Vale entender os prós e contras de cada uma antes de escolher:
 
 ### Opção A — Frontend completo primeiro
+
 Constrói toda a tela, depois liga com o backend.
+
 - Feedback visual imediato, motivador no começo.
 - Precisa simular dados falsos (mock) que podem não bater com o formato real da API depois. Gera retrabalho na hora de integrar. O iniciante aprende a "decorar" a tela sem entender de onde vêm os dados.
 
 ### Opção B — Backend completo primeiro
+
 Constrói toda a API e o banco, depois faz a tela.
+
 - Define bem o "contrato" da API (rotas, formato dos dados) antes de tudo. Força entender bem Sequelize/banco.
 - Fica muito tempo sem ver nada visualmente rodando — desmotivador para quem está começando. Testar só via Postman/Insomnia exige aprender outra ferramenta antes de ver qualquer resultado "de verdade".
 
 ### Opção C — Por feature (fatia vertical / "vertical slice")
+
 Para cada funcionalidade, implementa o mínimo necessário em banco → backend → frontend, até funcionar de ponta a ponta, e só então parte para a próxima funcionalidade.
+
 - Fecha o ciclo completo rapidamente — o iniciante entende toda a "viagem" do dado, do banco até a tela, logo na primeira feature. Feedback rápido e motivador. Erros de configuração (CORS, conexão com banco, porta errada) aparecem cedo e isolados, mais fáceis de debugar.
 - Um pouco mais de troca de contexto entre frontend e backend a cada funcionalidade.
 
@@ -411,23 +447,23 @@ A ferramenta **opencode** pode ser usada como apoio pontual durante o desenvolvi
 
 ## 14. Documentação oficial das ferramentas
 
-| Ferramenta | Link oficial |
-|---|---|
-| Node.js | https://nodejs.org/en/docs |
-| Express | https://expressjs.com/ |
-| Sequelize | https://sequelize.org/docs/v6/ |
-| MySQL | https://dev.mysql.com/doc/ |
-| XAMPP | https://www.apachefriends.org/ |
-| Tailwind CSS (Play CDN) | https://tailwindcss.com/docs/installation/play-cdn |
-| Tailwind CSS — Responsive Design (mobile first) | https://tailwindcss.com/docs/responsive-design |
-| Tailwind CSS — Customizing colors (tema escuro) | https://tailwindcss.com/docs/colors |
-| MDN — HTML | https://developer.mozilla.org/pt-BR/docs/Web/HTML |
-| MDN — CSS | https://developer.mozilla.org/pt-BR/docs/Web/CSS |
-| MDN — JavaScript | https://developer.mozilla.org/pt-BR/docs/Web/JavaScript |
-| MDN — Fetch API | https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API |
-| MDN — setTimeout (base do debounce) | https://developer.mozilla.org/pt-BR/docs/Web/API/setTimeout |
-| MDN — Date (cálculo de tarefa atrasada) | https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date |
+| Ferramenta                                      | Link oficial                                                                          |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Node.js                                         | https://nodejs.org/en/docs                                                            |
+| Express                                         | https://expressjs.com/                                                                |
+| Sequelize                                       | https://sequelize.org/docs/v6/                                                        |
+| MySQL                                           | https://dev.mysql.com/doc/                                                            |
+| XAMPP                                           | https://www.apachefriends.org/                                                        |
+| Tailwind CSS (Play CDN)                         | https://tailwindcss.com/docs/installation/play-cdn                                    |
+| Tailwind CSS — Responsive Design (mobile first) | https://tailwindcss.com/docs/responsive-design                                        |
+| Tailwind CSS — Customizing colors (tema escuro) | https://tailwindcss.com/docs/colors                                                   |
+| MDN — HTML                                      | https://developer.mozilla.org/pt-BR/docs/Web/HTML                                     |
+| MDN — CSS                                       | https://developer.mozilla.org/pt-BR/docs/Web/CSS                                      |
+| MDN — JavaScript                                | https://developer.mozilla.org/pt-BR/docs/Web/JavaScript                               |
+| MDN — Fetch API                                 | https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API                            |
+| MDN — setTimeout (base do debounce)             | https://developer.mozilla.org/pt-BR/docs/Web/API/setTimeout                           |
+| MDN — Date (cálculo de tarefa atrasada)         | https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date |
 
 ---
 
-*Documento criado para orientar o desenvolvimento do projeto beca-list por um desenvolvedor iniciante em ambiente fullstack.*
+_Documento criado para orientar o desenvolvimento do projeto beca-list por um desenvolvedor iniciante em ambiente fullstack._

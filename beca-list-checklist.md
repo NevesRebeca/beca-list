@@ -11,7 +11,7 @@
 - [x] Backend: criar rota de teste `GET /ping` retornando `{ status: "ok" }`
 - [x] Conectando opencode ao projeto;
 - [x] Backend: criar `src/config/database.js` e conectar Sequelize ao MySQL (XAMPP)
-- [ ] Frontend: criar `index.html` base com Tailwind via CDN + cores do tema (seção 6)
+- [x] Frontend: criar `index.html` base com Tailwind via CDN + cores do tema (seção 6)
 - [ ] Frontend: `fetch()` no `GET /ping` e mostrar resultado na tela
 - [ ] **Validação:** ver "ok" na tela = esqueleto funcionando ponta a ponta 🎉
 

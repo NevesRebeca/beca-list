@@ -1,14 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+    --color-bg: #201E1D;
+    --color-surface: #2D2B2B;
+    --color-text: #F3F2F2;
+    --color-divider: #605D5D;
+
+    --color-accent: #EC3013;
+    --color-accent-500: #FF563C; /* prioridade alta */
+    --color-accent-300: #FFC4B8; /* prioridade média */
+
+    --color-neutral-400: #BAB6B6; /* prioridade baixa */
+  }
+</style>
 </head>
 
-<body>
-
+<body class="bg-bg text-text">
+  <h1 class="text-accent">Teste</h1>
+  <div id="status"> Carregando... </div>
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
