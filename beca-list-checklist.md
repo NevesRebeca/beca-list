@@ -12,12 +12,12 @@
 - [x] Conectando opencode ao projeto;
 - [x] Backend: criar `src/config/database.js` e conectar Sequelize ao MySQL (XAMPP)
 - [x] Frontend: criar `index.html` base com Tailwind via CDN + cores do tema (seção 6)
-- [ ] Frontend: `fetch()` no `GET /ping` e mostrar resultado na tela
-- [ ] **Validação:** ver "ok" na tela = esqueleto funcionando ponta a ponta 🎉
+- [x] Frontend: `fetch()` no `GET /ping` e mostrar resultado na tela
+- [x] **Validação:** ver "ok" na tela = esqueleto funcionando ponta a ponta 🎉
 
 ## Fase 1 — Listagem de tarefas (`GET /tasks`)
 
-- [ ] Backend: criar model `Task.js` (title, description, priority, due_date, completed)
+- [x] Backend: criar model `Task.js` (title, description, priority, due_date, completed)
 - [ ] Backend: `sequelize.sync()` cria a tabela automaticamente
 - [ ] Backend: rota + controller `GET /tasks` (sem filtros ainda, ordenado por `createdAt DESC`)
 - [ ] Testar rota isolada no Postman/Insomnia/Thunder Client
