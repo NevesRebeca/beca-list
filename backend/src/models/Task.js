@@ -1,4 +1,4 @@
-import sequelize from "src/config/database.js";
+import sequelize from "../config/database.js";
 import { Sequelize, DataTypes, Model } from "sequelize";
 
 class Task extends Model {}

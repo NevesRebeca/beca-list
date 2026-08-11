@@ -9,6 +9,16 @@ const api = {
       throw error;
     }
   },
+
+  async fetchTasks() {
+    try {
+      const response = await fetch(`http://localhost:3000/tasks`);
+      return await response.json();
+    } catch (error) {
+      alert("Erro ao buscar tarefas");
+      throw error;
+    }
+  },
 };
 
 export default api;

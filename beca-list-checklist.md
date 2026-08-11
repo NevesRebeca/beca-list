@@ -18,9 +18,9 @@
 ## Fase 1 — Listagem de tarefas (`GET /tasks`)
 
 - [x] Backend: criar model `Task.js` (title, description, priority, due_date, completed)
-- [ ] Backend: `sequelize.sync()` cria a tabela automaticamente
-- [ ] Backend: rota + controller `GET /tasks` (sem filtros ainda, ordenado por `createdAt DESC`)
-- [ ] Testar rota isolada no Postman/Insomnia/Thunder Client
+- [x] Backend: `sequelize.sync()` cria a tabela automaticamente
+- [x] Backend: rota + controller `GET /tasks` (sem filtros ainda, ordenado por `createdAt DESC`)
+- [x] Testar rota isolada no Postman/Insomnia/Thunder Client
 - [ ] Frontend: função `fetchTasks()` em `js/api.js`
 - [ ] Frontend: renderizar lista de tarefas na tela (com loading)
 - [ ] Frontend: layout mobile first da lista (cards, badges de prioridade/data)
