@@ -22,13 +22,96 @@
 </head>
 
 <body class="bg-bg text-text">
-  <h1 class="text-accent">Teste</h1>
-  <div id="status"> Carregando... </div>
+  <header>
+    <section>
+      <h2>EM ABERTO</h2>
+      <p>6</p>
+    </section>
+    <section>
+      <h2>PARA HOJE</h2>
+      <p>1</p>
+    </section>
+  </header>
+  <main>
+    <section>
+      <form>
+        <input type="search" placeholder="Buscar título ou descrição">
+      </form>
+    </section>
 
-  <ul id="task-list"></ul>
+    <nav>
+      <ul class="flex gap-2">
+        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs">TODAS</button></li>
+        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs">HOJE</button></li>
+        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs">PRIORIDADE</button></li>
+        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs ">CONCLUÍDAS</button></li>
+      </ul>
+    </nav>
+
+    <section>
+      <ul>
+        <li>
+          <article class="bg-surface rounded-lg p-4 mb-3">
+            <label for="task-1" class="flex justify-between">
+              <div>
+                <input type="checkbox" id="task-1">
+                <strong>Comprar leite</strong>
+              </div>
+              <span> ⬆ </span>
+            </label>
+            <p class="line-clamp-1">Comprar leite integral no supermercado</p>
+            <footer class="flex gap-2">
+              <span class="rounded-full px-3 py-1 bg-divider text-xs">HOJE</span>
+              <span class="rounded-full px-3 py-1 bg-divider text-xs">ALTA</span>
+            </footer>
+          </article>
+        </li>
+
+        <!--Adicionar outras tarefas-->
+      </ul>
+    </section>
+
+    <div class="bg-accent rounded-lg p-4 mb-3 text-xs">
+      <button type="button" class="font-bold"> NOVA TAREFA + </button>
+    </div>
+
+    <h1 class="text-accent">Teste</h1>
+    <div id="status"> Carregando... </div>
+
+    <ul id="task-list"></ul>
+
+  </main>
   <script type="module" src="js/api.js"></script>
   <script type="module" src="js/ui.js"></script>
   <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
+<!--
+<label for="task-1">
+  <strong>Comprar leite</strong>
+  <span> ⬆ </span>
+</label>
+````//
+Pensa: esse `<label>` é o elemento **pai** de `<strong>` e `<span>`. Você quer que esses dois fiquem lado a lado, com o título colado à esquerda e o ícone colado à direita (com espaço vazio entre eles). Das 3 classes que você aprendeu (`flex`, `justify-between`, `items-center`), quais você colocaria nesse `<label>`?
+
+**2. A linha dos badges**
+
+```html
+<footer>
+  <span>HOJE</span>
+  <span>ALTA</span>
+</footer>
+```
+Aqui é diferente: você quer os dois badges **próximos um do outro**, colados à esquerda (não espalhados nas pontas). Lembra que eu mencionei uma classe diferente do `justify-between` para esse caso — que já tem espaço fixo entre os itens? (dica: começa com `gap-`, ex: `gap-2`). Você colocaria `flex` + essa classe de espaçamento no `<footer>`.
+
+**3. O card em si (o `<article>`)**
+
+Esse é o elemento que precisa parecer um "cartão": fundo mais claro que o body (`bg-surface`), cantos arredondados (`rounded-lg` ou `rounded-xl`), espaçamento interno (`p-4`), e espaço embaixo dele antes do próximo card (`mb-3`). Você aplicaria essas 4 classes direto no `<article>`.
+
+**4. As "pills" dos badges**
+
+Cada `<span>` dentro do `<footer>` precisa virar uma "cápsula": cantos bem arredondados (`rounded-full`), um pouco de espaçamento interno (`px-3 py-1`), fundo sutil (`bg-divider`, por exemplo), texto pequeno (`text-xs`). Aplicaria isso em cada `<span>`.
+
+Tenta aplicar essas classes nos 4 pontos que listei (título+ícone, badges footer, article, spans dos badges) e me manda o resultado. Não precisa se preocupar com a borda colorida lateral nem com os outros elementos da página (header, busca, filtros) ainda — um passo de cada vez, focando só nesse card primeiro.
+-->

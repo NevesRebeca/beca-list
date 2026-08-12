@@ -214,6 +214,7 @@ Registro dessas cores no Tailwind via CDN:
     --color-text: #F3F2F2;
     --color-divider: #605D5D;
 
+
     --color-accent: #EC3013;
     --color-accent-500: #FF563C; /* prioridade alta */
     --color-accent-300: #FFC4B8; /* prioridade média */

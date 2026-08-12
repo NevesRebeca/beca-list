@@ -21,8 +21,8 @@
 - [x] Backend: `sequelize.sync()` cria a tabela automaticamente
 - [x] Backend: rota + controller `GET /tasks` (sem filtros ainda, ordenado por `createdAt DESC`)
 - [x] Testar rota isolada no Postman/Insomnia/Thunder Client
-- [ ] Frontend: função `fetchTasks()` em `js/api.js`
-- [ ] Frontend: renderizar lista de tarefas na tela (com loading)
+- [x] Frontend: função `fetchTasks()` em `js/api.js`
+- [x] Frontend: renderizar lista de tarefas na tela (com loading)
 - [ ] Frontend: layout mobile first da lista (cards, badges de prioridade/data)
 
 ## Fase 2 — Criar tarefa (`POST /tasks`)
