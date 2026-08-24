@@ -72,7 +72,27 @@
     </section>
 
     <div class="bg-accent rounded-lg p-4 mb-3 text-xs">
-      <button type="button" class="font-bold"> NOVA TAREFA + </button>
+      <button type="button" id="btn-new-task" class="font-bold"> NOVA TAREFA + </button>
+    </div>
+    <div id="task-modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-end">
+      <div class="w-full rounded-t-lg bg-surface p-2">
+        <div class="flex justify-between">
+          <h2> NOVA TAREFA </h2>
+          <button type="button" id="btn-close-modal" class="font-bold"> FECHAR </button>
+        </div>
+        <form id="task-form">
+          <input type="text" id="task-title" placeholder="O que precisa ser feito?" class="font-bold">
+          <textarea id="task-description" placeholder="Descrição (opcional)"></textarea>
+          <input type="date" id="task-date">
+          <div class="flex gap-2 rounded-full px-3 py-1 bg-divider text-xs">
+            <button type="button" data-prioridade="alta">⬆</button>
+            <button type="button" class="bg-accent rounded-full" data-prioridade="media">⮕</button>
+            <button type="button" data-prioridade="baixa">⬇</button>
+          </div>
+          <p id="prioridade-padrao"> PRIORIDADE: MÉDIA </p>
+          <button type="submit" class="w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs"> CRIAR TAREFA </button>
+        </form>
+      </div>
     </div>
 
     <h1 class="text-accent">Teste</h1>
@@ -87,31 +107,3 @@
 </body>
 
 </html>
-<!--
-<label for="task-1">
-  <strong>Comprar leite</strong>
-  <span> ⬆ </span>
-</label>
-````//
-Pensa: esse `<label>` é o elemento **pai** de `<strong>` e `<span>`. Você quer que esses dois fiquem lado a lado, com o título colado à esquerda e o ícone colado à direita (com espaço vazio entre eles). Das 3 classes que você aprendeu (`flex`, `justify-between`, `items-center`), quais você colocaria nesse `<label>`?
-
-**2. A linha dos badges**
-
-```html
-<footer>
-  <span>HOJE</span>
-  <span>ALTA</span>
-</footer>
-```
-Aqui é diferente: você quer os dois badges **próximos um do outro**, colados à esquerda (não espalhados nas pontas). Lembra que eu mencionei uma classe diferente do `justify-between` para esse caso — que já tem espaço fixo entre os itens? (dica: começa com `gap-`, ex: `gap-2`). Você colocaria `flex` + essa classe de espaçamento no `<footer>`.
-
-**3. O card em si (o `<article>`)**
-
-Esse é o elemento que precisa parecer um "cartão": fundo mais claro que o body (`bg-surface`), cantos arredondados (`rounded-lg` ou `rounded-xl`), espaçamento interno (`p-4`), e espaço embaixo dele antes do próximo card (`mb-3`). Você aplicaria essas 4 classes direto no `<article>`.
-
-**4. As "pills" dos badges**
-
-Cada `<span>` dentro do `<footer>` precisa virar uma "cápsula": cantos bem arredondados (`rounded-full`), um pouco de espaçamento interno (`px-3 py-1`), fundo sutil (`bg-divider`, por exemplo), texto pequeno (`text-xs`). Aplicaria isso em cada `<span>`.
-
-Tenta aplicar essas classes nos 4 pontos que listei (título+ícone, badges footer, article, spans dos badges) e me manda o resultado. Não precisa se preocupar com a borda colorida lateral nem com os outros elementos da página (header, busca, filtros) ainda — um passo de cada vez, focando só nesse card primeiro.
--->

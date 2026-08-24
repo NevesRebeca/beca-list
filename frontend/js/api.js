@@ -19,6 +19,22 @@ const api = {
       throw error;
     }
   },
+
+  async createTask(taskData) {
+    try {
+      const response = await fetch(`http://localhost:3000/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(taskData),
+      });
+      return await response.json();
+    } catch (error) {
+      alert("Erro ao criar tarefa");
+      throw error;
+    }
+  },
 };
 
 export default api;

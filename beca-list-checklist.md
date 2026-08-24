@@ -23,13 +23,13 @@
 - [x] Testar rota isolada no Postman/Insomnia/Thunder Client
 - [x] Frontend: função `fetchTasks()` em `js/api.js`
 - [x] Frontend: renderizar lista de tarefas na tela (com loading)
-- [ ] Frontend: layout mobile first da lista (cards, badges de prioridade/data)
+- [x] Frontend: layout mobile first da lista (cards, badges de prioridade/data)
 
 ## Fase 2 — Criar tarefa (`POST /tasks`)
 
-- [ ] Backend: rota + controller `POST /tasks`
-- [ ] Testar no Postman/Insomnia
-- [ ] Frontend: modal `openTaskModal("create")`
+- [x] Backend: rota + controller `POST /tasks`
+- [x] Testar no Postman/Insomnia
+- [x] Frontend: modal `openTaskModal("create")`
 - [ ] Frontend: enviar formulário via fetch e atualizar lista
 
 ## Fase 3 — Concluir/desmarcar tarefa

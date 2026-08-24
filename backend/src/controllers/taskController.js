@@ -12,6 +12,19 @@ class TaskController {
         .json({ message: `${error.message} - falha na requisição` });
     }
   }
+
+  static async createTask(req, res) {
+    try {
+      const newTask = await Task.create(req.body);
+      res
+        .status(201)
+        .json({ message: "tarefa cadastrada com sucesso", task: newTask });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: `${error.message} - falha ao cadastrar tarefa` });
+    }
+  }
 }
 
 export default TaskController;
