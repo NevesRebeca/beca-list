@@ -25,6 +25,28 @@ class TaskController {
         .json({ message: `${error.message} - falha ao cadastrar tarefa` });
     }
   }
+
+  static async toggleTaskStatus(req, res) {
+    try {
+      const id = req.params.id;
+      const task = await Task.findByPk(id);
+      if (!task) {
+        return res.status(404).json({ message: "Tarefa não encontrada" });
+      } else {
+        task.completed = !task.completed;
+        await task.save();
+        res
+          .status(200)
+          .json({ message: "Status da tarefa atualizado com sucesso", task });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({
+          message: `${error.message} - falha ao atualizar status da tarefa`,
+        });
+    }
+  }
 }
 
 export default TaskController;

@@ -2,6 +2,18 @@ import api from "./api.js";
 
 let selectedPriority = "media";
 
+const priorityIcons = {
+  alta: "⬆",
+  media: "→",
+  baixa: "⬇",
+};
+
+const textBadgesPriority = {
+  alta: "ALTA",
+  media: "MÉDIA",
+  baixa: "BAIXA",
+};
+
 const ui = {
   async testConnection() {
     const result = await api.test();
@@ -11,10 +23,33 @@ const ui = {
   async renderTasks(tasks) {
     const taskList = document.getElementById("task-list");
     taskList.innerHTML = ""; // Limpa a lista antes de renderizar
+
     tasks.forEach((task) => {
-      const taskItem = document.createElement("li");
-      taskItem.textContent = task.title;
-      taskList.appendChild(taskItem);
+      const card = document.createElement("li");
+      card.innerHTML = `
+      <article class="bg-surface rounded-lg p-4 mb-3 border-r-4 border-accent-500">
+            <label for="task-${task.id}" class="flex justify-between">
+              <div class="flex gap-2">
+                <input type="checkbox" id="task-${task.id}" ${task.completed ? "checked" : ""}>
+                <strong class="${task.completed ? "line-through opacity-50" : ""}">${task.title}</strong>
+              </div>
+              <span>${priorityIcons[task.priority]}</span>
+            </label>
+            <p class="line-clamp-1 text-neutral-400 ${task.completed ? "opacity-50" : ""}">${task.description || ""}</p>
+            <footer class="flex gap-2">
+              <span class="rounded-full px-3 py-1 bg-divider text-xs">${task.due_date || "Sem data"}</span>
+              <span class="rounded-full px-3 py-1 bg-divider text-xs">${textBadgesPriority[task.priority]}</span>
+            </footer>
+          </article>
+      `;
+
+      taskList.appendChild(card);
+
+      const checkbox = card.querySelector("input[type='checkbox']");
+      checkbox.addEventListener("change", async () => {
+        await api.toggleTaskStatus(task.id);
+        this.loadTasks();
+      });
     });
   },
 
@@ -72,5 +107,7 @@ const ui = {
       this.loadTasks();
     });
   },
+
+  AddingTaskToList(task) {},
 };
 export default ui;

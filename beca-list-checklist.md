@@ -30,11 +30,11 @@
 - [x] Backend: rota + controller `POST /tasks`
 - [x] Testar no Postman/Insomnia
 - [x] Frontend: modal `openTaskModal("create")`
-- [ ] Frontend: enviar formulário via fetch e atualizar lista
+- [x] Frontend: enviar formulário via fetch e atualizar lista
 
 ## Fase 3 — Concluir/desmarcar tarefa
 
-- [ ] Backend: `PUT /tasks/:id` aceitando toggle de `completed`
+- [x] Backend: `PUT /tasks/:id` aceitando toggle de `completed`
 - [ ] Frontend: checkbox conectado ao endpoint
 - [ ] Frontend: estilo de tarefa concluída (line-through, cor esmaecida)
 

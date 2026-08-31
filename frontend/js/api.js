@@ -35,6 +35,18 @@ const api = {
       throw error;
     }
   },
+
+  async toggleTaskStatus(id) {
+    try {
+      const response = await fetch(`http://localhost:3000/tasks/${id}/toggle`, {
+        method: "PUT",
+      });
+      return await response.json();
+    } catch (error) {
+      alert("Erro ao atualizar status da tarefa");
+      throw error;
+    }
+  },
 };
 
 export default api;
