@@ -50,6 +50,12 @@ const ui = {
         await api.toggleTaskStatus(task.id);
         this.loadTasks();
       });
+
+      const article = card.querySelector("article");
+      article.addEventListener("click", (event) => {
+        if (event.target.type === "checkbox") return;
+        this.openTaskModal("edit", task);
+      });
     });
   },
 
@@ -61,10 +67,34 @@ const ui = {
     this.renderTasks(tasks);
   },
 
-  openTaskModal(mode) {
+  openTaskModal(mode, taskData = null) {
     const modal = document.getElementById("task-modal");
-    if (mode === "create") {
-      modal.classList.remove("hidden");
+    modal.classList.remove("hidden");
+
+    const modalTitle = document.getElementById("modal-title");
+    const submitButton = document.getElementById("btn-submit-task");
+
+    if (mode === "edit" && taskData) {
+      modalTitle.textContent = "EDITAR TAREFA";
+      submitButton.textContent = "SALVAR ALTERAÇÕES";
+      document.getElementById("task-title").value = taskData.title;
+      document.getElementById("task-description").value =
+        taskData.description || "";
+      document.getElementById("task-date").value = taskData.due_date
+        ? taskData.due_date.split("T")[0] // O .split("T") corta a string na letra "T", virando um array ["2026-08-20", "00:00:00.000Z"], e pegamos só o primeiro pedaço ([0]).
+        : "";
+
+      selectedPriority = taskData.priority;
+      document.getElementById("prioridade-padrao").textContent =
+        `PRIORIDADE: ${textBadgesPriority[taskData.priority]}`;
+
+      modal.dataset.editingId = taskData.id; // Armazena o ID da tarefa sendo editada
+    } else {
+      modalTitle.textContent = "NOVA TAREFA";
+      submitButton.textContent = "CRIAR TAREFA";
+      document.getElementById("task-form").reset();
+      selectedPriority = "media";
+      modal.dataset.editingId = "";
     }
   },
 
@@ -91,6 +121,7 @@ const ui = {
 
   setupTaskForm() {
     const form = document.getElementById("task-form");
+    const modal = document.getElementById("task-modal");
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -102,7 +133,14 @@ const ui = {
         priority: selectedPriority,
       };
 
-      await api.createTask(taskData);
+      const editingId = modal.dataset.editingId;
+
+      if (editingId) {
+        await api.updateTask(editingId, taskData);
+      } else {
+        await api.createTask(taskData);
+      }
+
       this.closeTaskModal();
       this.loadTasks();
     });

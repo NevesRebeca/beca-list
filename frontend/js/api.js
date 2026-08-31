@@ -47,6 +47,23 @@ const api = {
       throw error;
     }
   },
+
+  async updateTask(id, taskData) {
+    try {
+      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+
+        body: JSON.stringify(taskData),
+      });
+      return await response.json();
+    } catch (error) {
+      alert("Erro ao atualizar tarefa");
+      throw error;
+    }
+  },
 };
 
 export default api;

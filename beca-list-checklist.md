@@ -35,13 +35,13 @@
 ## Fase 3 — Concluir/desmarcar tarefa
 
 - [x] Backend: `PUT /tasks/:id` aceitando toggle de `completed`
-- [ ] Frontend: checkbox conectado ao endpoint
-- [ ] Frontend: estilo de tarefa concluída (line-through, cor esmaecida)
+- [x] Frontend: checkbox conectado ao endpoint
+- [x] Frontend: estilo de tarefa concluída (line-through, cor esmaecida)
 
 ## Fase 4 — Editar tarefa (`PUT /tasks/:id`)
 
-- [ ] Backend: `PUT /tasks/:id` completo (todos os campos)
-- [ ] Frontend: reaproveitar modal em `openTaskModal("edit", taskData)`
+- [x] Backend: `PUT /tasks/:id` completo (todos os campos)
+- [x] Frontend: reaproveitar modal em `openTaskModal("edit", taskData)`
 
 ## Fase 5 — Excluir tarefa (`DELETE /tasks/:id`)
 

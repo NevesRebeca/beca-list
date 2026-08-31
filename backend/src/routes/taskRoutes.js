@@ -6,5 +6,6 @@ const routes = express.Router();
 routes.get("/", taskController.getTask);
 routes.post("/", taskController.createTask);
 routes.put("/:id/toggle", taskController.toggleTaskStatus);
+routes.put("/:id", taskController.updateTask);
 
 export default routes;
