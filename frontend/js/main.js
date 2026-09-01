@@ -4,6 +4,7 @@ import ui from "./ui.js";
 ui.loadTasks();
 ui.setupTaskForm();
 ui.setupPriorityButtons();
+ui.setupDeleteButton();
 
 document
   .getElementById("btn-new-task")

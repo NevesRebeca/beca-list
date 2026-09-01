@@ -58,9 +58,19 @@ const api = {
 
         body: JSON.stringify(taskData),
       });
-      return await response.json();
     } catch (error) {
       alert("Erro ao atualizar tarefa");
+      throw error;
+    }
+  },
+
+  async deleteTask(id) {
+    try {
+      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      alert("Erro ao deletar tarefa");
       throw error;
     }
   },

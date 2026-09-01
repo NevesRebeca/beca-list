@@ -64,6 +64,23 @@ class TaskController {
       });
     }
   }
+
+  static async deleteTask(req, res) {
+    try {
+      const id = req.params.id;
+      const task = await Task.findByPk(id);
+      if (!task) {
+        return res.status(404).json({ message: "Tarefa não encontrada" });
+      } else {
+        await task.destroy();
+        res.status(200).json({ message: "Tarefa excluída com sucesso" });
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: `${error.message} - falha ao excluir tarefa`,
+      });
+    }
+  }
 }
 
 export default TaskController;

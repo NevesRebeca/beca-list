@@ -61,12 +61,13 @@
           <textarea id="task-description" placeholder="Descrição (opcional)"></textarea>
           <input type="date" id="task-date">
           <div class="flex gap-2">
-            <button type="button" data-prioridade="alta" class="flex-1 border border-divider rounded-lg py-2 text-xs">⬆ ALTA</button>
+            <button type="button" data-prioridade="alta" class="flex-1 border border-divider rounded-lg py-2 text-xs">⭡ ALTA</button>
             <button type="button" data-prioridade="media" class="flex-1 border border-divider rounded-lg py-2 text-xs bg-accent">→ MÉDIA</button>
-            <button type="button" data-prioridade="baixa" class="flex-1 border border-divider rounded-lg py-2 text-xs">⬇ BAIXA</button>
+            <button type="button" data-prioridade="baixa" class="flex-1 border border-divider rounded-lg py-2 text-xs">⭣ BAIXA</button>
           </div>
           <p id="prioridade-padrao"> PRIORIDADE: MÉDIA </p>
           <button type="submit" id="btn-submit-task" class="w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs"> CRIAR TAREFA </button>
+          <button id="btn-delete-task" type="button" class="hidden w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs"> EXCLUIR </button>
         </form>
       </div>
     </div>

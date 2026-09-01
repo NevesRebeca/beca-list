@@ -3,9 +3,9 @@ import api from "./api.js";
 let selectedPriority = "media";
 
 const priorityIcons = {
-  alta: "⬆",
+  alta: "⭡",
   media: "→",
-  baixa: "⬇",
+  baixa: "⭣",
 };
 
 const textBadgesPriority = {
@@ -74,8 +74,10 @@ const ui = {
     const modalTitle = document.getElementById("modal-title");
     const submitButton = document.getElementById("btn-submit-task");
     const priorityButtons = document.querySelectorAll("[data-prioridade]");
+    const deleteButton = document.getElementById("btn-delete-task");
 
     if (mode === "edit" && taskData) {
+      deleteButton.classList.remove("hidden");
       modalTitle.textContent = "EDITAR TAREFA";
       submitButton.textContent = "SALVAR ALTERAÇÕES";
       document.getElementById("task-title").value = taskData.title;
@@ -98,6 +100,7 @@ const ui = {
 
       modal.dataset.editingId = taskData.id;
     } else {
+      deleteButton.classList.add("hidden");
       modalTitle.textContent = "NOVA TAREFA";
       submitButton.textContent = "CRIAR TAREFA";
       document.getElementById("task-form").reset();
@@ -164,6 +167,22 @@ const ui = {
     });
   },
 
-  AddingTaskToList(task) {},
+  setupDeleteButton() {
+    const deleteButton = document.getElementById("btn-delete-task");
+    const modal = document.getElementById("task-modal");
+
+    deleteButton.addEventListener("click", async () => {
+      const confirmDelete = confirm(
+        "Tem certeza que deseja excluir essa tarefa?",
+      );
+      if (!confirmDelete) return;
+
+      const id = modal.dataset.editingId;
+      await api.deleteTask(id);
+      this.closeTaskModal();
+      this.loadTasks();
+    });
+  },
 };
+
 export default ui;
