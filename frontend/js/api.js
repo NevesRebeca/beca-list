@@ -53,7 +53,7 @@ const api = {
       const response = await fetch(`http://localhost:3000/tasks/${id}`, {
         method: "PUT",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
 
         body: JSON.stringify(taskData),

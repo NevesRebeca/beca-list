@@ -60,10 +60,10 @@
           <input type="text" id="task-title" placeholder="O que precisa ser feito?" class="font-bold">
           <textarea id="task-description" placeholder="Descrição (opcional)"></textarea>
           <input type="date" id="task-date">
-          <div class="flex gap-2 rounded-full px-3 py-1 bg-divider text-xs">
-            <button type="button" data-prioridade="alta">⬆</button>
-            <button type="button" class="bg-accent rounded-full" data-prioridade="media">⮕</button>
-            <button type="button" data-prioridade="baixa">⬇</button>
+          <div class="flex gap-2">
+            <button type="button" data-prioridade="alta" class="flex-1 border border-divider rounded-lg py-2 text-xs">⬆ ALTA</button>
+            <button type="button" data-prioridade="media" class="flex-1 border border-divider rounded-lg py-2 text-xs bg-accent">→ MÉDIA</button>
+            <button type="button" data-prioridade="baixa" class="flex-1 border border-divider rounded-lg py-2 text-xs">⬇ BAIXA</button>
           </div>
           <p id="prioridade-padrao"> PRIORIDADE: MÉDIA </p>
           <button type="submit" id="btn-submit-task" class="w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs"> CRIAR TAREFA </button>
