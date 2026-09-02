@@ -45,14 +45,14 @@
 
 ## Fase 5 — Excluir tarefa (`DELETE /tasks/:id`)
 
-- [ ] Backend: rota + controller `DELETE /tasks/:id`
-- [ ] Frontend: botão excluir + confirmação + atualizar lista
+- [x] Backend: rota + controller `DELETE /tasks/:id`
+- [x] Frontend: botão excluir + confirmação + atualizar lista
 
 ## Fase 6 — Busca com debounce
 
-- [ ] Frontend: `js/debounce.js`
-- [ ] Backend: `GET /tasks?search=texto` (filtro por título)
-- [ ] Frontend: input de busca conectado com debounce (300–500ms)
+- [x] Frontend: `js/debounce.js`
+- [x] Backend: `GET /tasks?search=texto` (filtro por título)
+- [x] Frontend: input de busca conectado com debounce (300–500ms)
 
 ## Fase 7 — Paginação
 
@@ -74,5 +74,5 @@
 - [ ] Layout responsivo mobile first + paleta do tema
 - [ ] Loading em toda chamada ao backend
 - [ ] Modal único reaproveitado
-- [ ] Sequelize criando as tabelas (não manual no phpMyAdmin)
+- [x] Sequelize criando as tabelas (não manual no phpMyAdmin)
 - [ ] Nomes em inglês (variáveis, funções, arquivos)

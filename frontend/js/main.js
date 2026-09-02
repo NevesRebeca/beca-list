@@ -1,5 +1,15 @@
 import api from "./api.js";
 import ui from "./ui.js";
+import { debounce } from "./debounce.js";
+
+const searchInput = document.getElementById("search-input");
+const debouncedSearch = debounce((texto) => {
+  ui.loadTasks(texto);
+}, 400);
+
+searchInput.addEventListener("input", (event) => {
+  debouncedSearch(event.target.value);
+});
 
 ui.loadTasks();
 ui.setupTaskForm();

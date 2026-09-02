@@ -10,9 +10,12 @@ const api = {
     }
   },
 
-  async fetchTasks() {
+  async fetchTasks(search = "") {
     try {
-      const response = await fetch(`http://localhost:3000/tasks`);
+      const url = search
+        ? `http://localhost:3000/tasks?search=${search}`
+        : `http://localhost:3000/tasks`;
+      const response = await fetch(url);
       return await response.json();
     } catch (error) {
       alert("Erro ao buscar tarefas");

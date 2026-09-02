@@ -59,11 +59,11 @@ const ui = {
     });
   },
 
-  async loadTasks() {
+  async loadTasks(search = "") {
     const taskList = document.getElementById("task-list");
     taskList.innerHTML = "<li>Carregando tarefas...</li>";
 
-    const tasks = await api.fetchTasks();
+    const tasks = await api.fetchTasks(search);
     this.renderTasks(tasks);
   },
 

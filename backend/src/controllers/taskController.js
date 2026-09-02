@@ -1,10 +1,22 @@
-import Sequelize from "sequelize";
+import { Sequelize, Op } from "sequelize";
 import Task from "../models/Task.js";
 
 class TaskController {
   static async getTask(req, res) {
     try {
-      const tasks = await Task.findAll({ order: [["createdAt", "DESC"]] });
+      const { search } = req.query;
+
+      const tasks = await Task.findAll({
+        where: search
+          ? {
+              title: {
+                [Op.like]: `%${search}%`,
+              },
+            }
+          : {},
+        order: [["createdAt", "DESC"]],
+      });
+
       res.status(200).json(tasks);
     } catch (error) {
       res
