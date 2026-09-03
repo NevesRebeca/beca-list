@@ -10,11 +10,9 @@ const api = {
     }
   },
 
-  async fetchTasks(search = "") {
+  async fetchTasks(search = "", page = 1, limit = 5) {
     try {
-      const url = search
-        ? `http://localhost:3000/tasks?search=${search}`
-        : `http://localhost:3000/tasks`;
+      const url = `http://localhost:3000/tasks?search=${search}&page=${page}&limit=${limit}`;
       const response = await fetch(url);
       return await response.json();
     } catch (error) {

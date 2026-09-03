@@ -6,6 +6,7 @@ const searchInput = document.getElementById("search-input");
 const debouncedSearch = debounce((texto) => {
   ui.loadTasks(texto);
 }, 400);
+const loadMoreButton = document.getElementById("btn-load-more");
 
 searchInput.addEventListener("input", (event) => {
   debouncedSearch(event.target.value);
@@ -23,3 +24,7 @@ document
 document
   .getElementById("btn-close-modal")
   .addEventListener("click", () => ui.closeTaskModal());
+
+loadMoreButton.addEventListener("click", () => {
+  ui.loadTasks(searchInput.value, ui.currentPage + 1, true);
+});

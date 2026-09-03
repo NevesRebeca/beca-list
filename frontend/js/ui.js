@@ -15,14 +15,19 @@ const textBadgesPriority = {
 };
 
 const ui = {
+  currentPage: 1,
+
   async testConnection() {
     const result = await api.test();
     document.getElementById("status").textContent = result.status;
   },
 
-  async renderTasks(tasks) {
+  async renderTasks(tasks, append = false) {
     const taskList = document.getElementById("task-list");
-    taskList.innerHTML = ""; // Limpa a lista antes de renderizar
+
+    if (!append) {
+      taskList.innerHTML = "";
+    }
 
     tasks.forEach((task) => {
       const card = document.createElement("li");
@@ -59,12 +64,27 @@ const ui = {
     });
   },
 
-  async loadTasks(search = "") {
+  async loadTasks(search = "", page = 1, append = false) {
     const taskList = document.getElementById("task-list");
-    taskList.innerHTML = "<li>Carregando tarefas...</li>";
 
-    const tasks = await api.fetchTasks(search);
-    this.renderTasks(tasks);
+    if (!append) {
+      taskList.innerHTML = "<li>Carregando tarefas...</li>";
+    }
+
+    this.currentPage = page;
+    const result = await api.fetchTasks(search, page);
+    this.renderTasks(result.rows, append);
+
+    const loadMoreButton = document.getElementById("btn-load-more");
+    const totalLoaded = append
+      ? document.querySelectorAll("#task-list .task-card").length
+      : result.rows.length;
+
+    if (totalLoaded >= result.count) {
+      loadMoreButton.classList.add("hidden");
+    } else {
+      loadMoreButton.classList.remove("hidden");
+    }
   },
 
   openTaskModal(mode, taskData = null) {
