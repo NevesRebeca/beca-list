@@ -22,33 +22,35 @@
 </head>
 
 <body class="bg-bg text-text">
-  <header>
-    <section>
-      <h2>EM ABERTO</h2>
-      <p>6</p>
+  <header class="flex divide-x divide-divider border-b border-divider  mb-4">
+    <section class="flex-1 p-4">
+      <h2 class="text-xs text-neutral-400">EM ABERTO</h2>
+      <p class="text-3xl font-bold">6</p>
     </section>
-    <section>
-      <h2>PARA HOJE</h2>
-      <p>1</p>
+    <section class="flex-1 p-4">
+      <h2 class="text-xs text-neutral-400">PARA HOJE</h2>
+      <p class="text-3xl font-bold text-accent">1</p>
     </section>
   </header>
-  <main>
-    <section>
+  <main class="px-4 pb-24">
+    <section class="mb-4">
       <form>
-        <input type="search" id="search-input" placeholder="Buscar título ou descrição">
+        <input type="search" id="search-input" placeholder="Buscar título ou descrição" class="w-full bg-transparent border border-divider rounded-full px-4 py-3 text-sm placeholder-neutral-400">
       </form>
     </section>
-    <nav>
-      <ul class="flex gap-2">
-        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs">TODAS</button></li>
-        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs">HOJE</button></li>
-        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs">PRIORIDADE</button></li>
-        <li><button type="button" class="rounded-full px-3 py-1 bg-divider text-xs ">CONCLUÍDAS</button></li>
+    <nav class="mb-2">
+      <ul class="flex gap-2 overflow-x-auto pb-2">
+        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">TODAS</button></li>
+        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">HOJE</button></li>
+        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">PRIORIDADE</button></li>
+        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs ">CONCLUÍDAS</button></li>
       </ul>
     </nav>
 
-    <div class="bg-accent rounded-lg p-4 mb-3 text-xs">
-      <button type="button" id="btn-new-task" class="font-bold"> NOVA TAREFA + </button>
+    <div class="fixed bottom-0 left-0 right-0 bg-bg p-4">
+      <button type="button" id="btn-new-task" class="w-full bg-accent rounded-lg p-4 text-xs font-bold">
+        NOVA TAREFA +
+      </button> <!-- lembrar de aplicar esses layout de botão quando abrir o modal -->
     </div>
     <div id="task-modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-end">
       <div class="w-full rounded-t-lg bg-surface p-2">

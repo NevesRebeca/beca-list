@@ -32,7 +32,7 @@ const ui = {
     tasks.forEach((task) => {
       const card = document.createElement("li");
       card.innerHTML = `
-  <article class="task-card bg-surface rounded-lg p-4 mb-3">
+  <article class="task-card bg-surface rounded-lg p-4 mb-4 border-r-4 border-accent-500">
     <div class="flex justify-between">
       <div class="flex gap-2">
         <input type="checkbox" id="task-${task.id}" ${task.completed ? "checked" : ""}>
