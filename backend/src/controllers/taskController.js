@@ -22,8 +22,38 @@ class TaskController {
           : {},
         order: [["createdAt", "DESC"]],
       });
+      const startingDate = new Date();
+      startingDate.setHours(0, 0, 0, 0);
 
-      res.status(200).json(tasks);
+      const endingDate = new Date();
+      endingDate.setHours(23, 59, 59, 999);
+
+      const todayCount = await Task.count({
+        where: {
+          due_date: { [Op.gte]: startingDate, [Op.lte]: endingDate },
+        },
+      });
+
+      const priorityCount = await Task.count({
+        where: {
+          priority: { [Op.eq]: "alta" },
+        },
+      });
+
+      const completedCount = await Task.count({
+        where: {
+          completed: { [Op.eq]: true },
+        },
+      });
+
+      res.status(200).json({
+        ...tasks,
+        counts: {
+          today: todayCount,
+          priority: priorityCount,
+          completed: completedCount,
+        },
+      });
     } catch (error) {
       res
         .status(500)

@@ -56,23 +56,23 @@
 
 ## Fase 7 — Paginação
 
-- [ ] Backend: `GET /tasks?page=&limit=` usando `limit`/`offset`
-- [ ] Frontend: controles de página conectados
+- [x] Backend: `GET /tasks?page=&limit=` usando `limit`/`offset`
+- [x] Frontend: controles de página conectados
 
 ## Fase 8 — Filtros, contadores e atraso (por último)
 
-- [ ] Backend: `counts` no `GET /tasks` (ou `GET /tasks/counts`) via `COUNT()`
-- [ ] Backend/Frontend: `isOverdue()` (atrasada = due_date passada e não concluída)
+- [x] Backend: `counts` no `GET /tasks` (ou `GET /tasks/counts`) via `COUNT()`
+- [x] Backend/Frontend: `isOverdue()` (atrasada = due_date passada e não concluída)
 - [ ] Frontend: chips de filtro (Todas/Hoje/Prioridade alta/Concluídas) + contadores
-- [ ] Frontend: badge de atrasada
+- [x] Frontend: badge de atrasada
 
 ## Fase 9 — Revisão final (checklist de entrega, seção 13)
 
-- [ ] Frontend e backend rodando e comunicando
-- [ ] CRUD completo funcionando
-- [ ] Checkbox concluir/desmarcar
+- [x] Frontend e backend rodando e comunicando
+- [x] CRUD completo funcionando
+- [x] Checkbox concluir/desmarcar
 - [ ] Layout responsivo mobile first + paleta do tema
 - [ ] Loading em toda chamada ao backend
-- [ ] Modal único reaproveitado
+- [x] Modal único reaproveitado
 - [x] Sequelize criando as tabelas (não manual no phpMyAdmin)
 - [ ] Nomes em inglês (variáveis, funções, arquivos)

@@ -14,6 +14,51 @@ const textBadgesPriority = {
   baixa: "BAIXA",
 };
 
+function isOverdue(task) {
+  if (task.completed) return false;
+  if (!task.due_date) return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const dueDate = new Date(task.due_date);
+  dueDate.setHours(0, 0, 0, 0);
+
+  return dueDate < today;
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "Sem data";
+
+  const date = new Date(dateString);
+  date.setHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  if (date.getTime() === today.getTime()) return "HOJE";
+  if (date.getTime() === tomorrow.getTime()) return "AMANHÃ";
+
+  const months = [
+    "JAN",
+    "FEV",
+    "MAR",
+    "ABR",
+    "MAI",
+    "JUN",
+    "JUL",
+    "AGO",
+    "SET",
+    "OUT",
+    "NOV",
+    "DEZ",
+  ];
+  return `${date.getDate()} ${months[date.getMonth()]}`;
+}
+
 const ui = {
   currentPage: 1,
 
@@ -42,7 +87,8 @@ const ui = {
     </div>
     <p class="line-clamp-1 text-neutral-400 ${task.completed ? "opacity-50" : ""}">${task.description || ""}</p>
     <footer class="flex gap-2">
-      <span class="rounded-full px-3 py-1 bg-divider text-xs">${task.due_date || "Sem data"}</span>
+      ${isOverdue(task) ? '<span class="rounded-full px-3 py-1 bg-accent text-xs">ATRASADA</span>' : ""}
+      <span class="rounded-full px-3 py-1 bg-divider text-xs">${formatDate(task.due_date)}</span>
       <span class="rounded-full px-3 py-1 bg-divider text-xs">${textBadgesPriority[task.priority]}</span>
     </footer>
   </article>
