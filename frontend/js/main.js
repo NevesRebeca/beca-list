@@ -16,6 +16,7 @@ ui.loadTasks();
 ui.setupTaskForm();
 ui.setupPriorityButtons();
 ui.setupDeleteButton();
+ui.setupFilterButtons();
 
 document
   .getElementById("btn-new-task")

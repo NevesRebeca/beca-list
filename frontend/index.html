@@ -40,10 +40,10 @@
     </section>
     <nav class="mb-2">
       <ul class="flex gap-2 overflow-x-auto pb-2">
-        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">TODAS</button></li>
-        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">HOJE</button></li>
-        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">PRIORIDADE</button></li>
-        <li><button type="button" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs ">CONCLUÍDAS</button></li>
+        <li><button type="button" data-filter="all" class="whitespace-nowrap rounded-full px-3 py-1 bg-accent text-xs">TODAS</button></li>
+        <li><button type="button" data-filter="today" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">HOJE <span id="count-today"></span></button></li>
+        <li><button type="button" data-filter="priority" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">PRIORIDADE ALTA <span id="count-priority"></span></button></li>
+        <li><button type="button" data-filter="completed" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">CONCLUÍDAS <span id="count-completed"></span></button></li>
       </ul>
     </nav>
 

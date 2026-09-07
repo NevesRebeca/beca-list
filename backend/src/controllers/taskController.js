@@ -4,29 +4,48 @@ import Task from "../models/Task.js";
 class TaskController {
   static async getTask(req, res) {
     try {
-      const { search } = req.query;
+      const { search, status, priority, due } = req.query;
 
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 10;
       const offset = (page - 1) * limit;
 
+      const where = {};
+
+      if (search) {
+        where.title = { [Op.like]: `%${search}%` };
+      }
+
+      if (status === "completed") {
+        where.completed = true;
+      }
+
+      if (priority) {
+        where.priority = priority;
+      }
+
+      if (due === "today") {
+        const startingDate = new Date();
+        startingDate.setUTCHours(0, 0, 0, 0);
+
+        const endingDate = new Date();
+        endingDate.setUTCHours(23, 59, 59, 999);
+
+        where.due_date = { [Op.gte]: startingDate, [Op.lte]: endingDate };
+      }
+
       const tasks = await Task.findAndCountAll({
         limit,
         offset,
-        where: search
-          ? {
-              title: {
-                [Op.like]: `%${search}%`,
-              },
-            }
-          : {},
+        where,
         order: [["createdAt", "DESC"]],
       });
+
       const startingDate = new Date();
-      startingDate.setHours(0, 0, 0, 0);
+      startingDate.setUTCHours(0, 0, 0, 0);
 
       const endingDate = new Date();
-      endingDate.setHours(23, 59, 59, 999);
+      endingDate.setUTCHours(23, 59, 59, 999);
 
       const todayCount = await Task.count({
         where: {

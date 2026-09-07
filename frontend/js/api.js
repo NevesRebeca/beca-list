@@ -1,3 +1,10 @@
+const filterParams = {
+  all: "",
+  today: "&due=today",
+  priority: "&priority=alta",
+  completed: "&status=completed",
+};
+
 const api = {
   async test() {
     // caso algum erro na requisição, o try catch vai capturar e exibir no console
@@ -10,9 +17,9 @@ const api = {
     }
   },
 
-  async fetchTasks(search = "", page = 1, limit = 5) {
+  async fetchTasks(search = "", page = 1, limit = 5, filter = "") {
     try {
-      const url = `http://localhost:3000/tasks?search=${search}&page=${page}&limit=${limit}`;
+      const url = `http://localhost:3000/tasks?search=${search}&page=${page}&limit=${limit}${filterParams[filter] || ""}`;
       const response = await fetch(url);
       return await response.json();
     } catch (error) {

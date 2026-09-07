@@ -63,7 +63,7 @@
 
 - [x] Backend: `counts` no `GET /tasks` (ou `GET /tasks/counts`) via `COUNT()`
 - [x] Backend/Frontend: `isOverdue()` (atrasada = due_date passada e não concluída)
-- [ ] Frontend: chips de filtro (Todas/Hoje/Prioridade alta/Concluídas) + contadores
+- [x] Frontend: chips de filtro (Todas/Hoje/Prioridade alta/Concluídas) + contadores
 - [x] Frontend: badge de atrasada
 
 ## Fase 9 — Revisão final (checklist de entrega, seção 13)

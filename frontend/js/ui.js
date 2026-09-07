@@ -19,10 +19,10 @@ function isOverdue(task) {
   if (!task.due_date) return false;
 
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  today.setUTCHours(0, 0, 0, 0);
 
   const dueDate = new Date(task.due_date);
-  dueDate.setHours(0, 0, 0, 0);
+  dueDate.setUTCHours(0, 0, 0, 0);
 
   return dueDate < today;
 }
@@ -31,10 +31,10 @@ function formatDate(dateString) {
   if (!dateString) return "Sem data";
 
   const date = new Date(dateString);
-  date.setHours(0, 0, 0, 0);
+  date.setUTCHours(0, 0, 0, 0);
 
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  today.setUTCHours(0, 0, 0, 0);
 
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -110,7 +110,7 @@ const ui = {
     });
   },
 
-  async loadTasks(search = "", page = 1, append = false) {
+  async loadTasks(search = "", page = 1, append = false, filter = "") {
     const taskList = document.getElementById("task-list");
 
     if (!append) {
@@ -118,13 +118,20 @@ const ui = {
     }
 
     this.currentPage = page;
-    const result = await api.fetchTasks(search, page);
+    const result = await api.fetchTasks(search, page, 5, filter);
     this.renderTasks(result.rows, append);
 
     const loadMoreButton = document.getElementById("btn-load-more");
     const totalLoaded = append
       ? document.querySelectorAll("#task-list .task-card").length
       : result.rows.length;
+
+    const countToday = document.getElementById("count-today");
+    countToday.textContent = result.counts.today;
+    const countPriority = document.getElementById("count-priority");
+    countPriority.textContent = result.counts.priority;
+    const countCompleted = document.getElementById("count-completed");
+    countCompleted.textContent = result.counts.completed;
 
     if (totalLoaded >= result.count) {
       loadMoreButton.classList.add("hidden");
@@ -247,6 +254,22 @@ const ui = {
       await api.deleteTask(id);
       this.closeTaskModal();
       this.loadTasks();
+    });
+  },
+
+  setupFilterButtons() {
+    const filterButtons = document.querySelectorAll("[data-filter]");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("bg-accent"));
+        filterButtons.forEach((b) => b.classList.add("bg-divider"));
+        button.classList.remove("bg-divider");
+        button.classList.add("bg-accent");
+
+        const filter = button.dataset.filter;
+        this.loadTasks("", 1, false, filter);
+      });
     });
   },
 };
