@@ -22,14 +22,17 @@
 </head>
 
 <body class="bg-bg text-text">
+  <div id="loading-overlay" class="hidden fixed inset-0 z-50 backdrop-blur-sm bg-black/40 flex items-center justify-center">
+    <img src="assets/beca-avatar.png" class="w-20 h-20 rounded-full object-cover animate-spin">
+  </div>
   <header class="flex divide-x divide-divider border-b border-divider  mb-4">
     <section class="flex-1 p-4">
       <h2 class="text-xs text-neutral-400">EM ABERTO</h2>
-      <p class="text-3xl font-bold">6</p>
+      <p id="open-count" class="text-3xl font-bold">6</p>
     </section>
     <section class="flex-1 p-4">
       <h2 class="text-xs text-neutral-400">PARA HOJE</h2>
-      <p class="text-3xl font-bold text-accent">1</p>
+      <p id="today-count-header" class="text-3xl font-bold text-accent">1</p>
     </section>
   </header>
   <main class="px-4 pb-24">
@@ -47,29 +50,31 @@
       </ul>
     </nav>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-bg p-4">
-      <button type="button" id="btn-new-task" class="w-full bg-accent rounded-lg p-4 text-xs font-bold">
-        NOVA TAREFA +
-      </button> <!-- lembrar de aplicar esses layout de botão quando abrir o modal -->
-    </div>
+    <button type="button" id="btn-new-task" class="fixed bottom-4 left-3 right-3 bg-accent rounded-lg p-4 text-xs font-bold">
+      NOVA TAREFA +
+    </button> <!-- lembrar de aplicar esses layout de botão quando abrir o modal -->
     <div id="task-modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-end">
-      <div class="w-full rounded-t-lg bg-surface p-2">
-        <div class="flex justify-between">
-          <h2 id="modal-title"> NOVA TAREFA </h2>
-          <button type="button" id="btn-close-modal" class="font-bold"> FECHAR </button>
+      <div class="w-full rounded-t-2xl bg-surface p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 id="modal-title" class="text-lg font-bold">NOVA TAREFA</h2>
+          <button type="button" id="btn-close-modal" class="font-bold text-accent text-xs">FECHAR</button>
         </div>
         <form id="task-form">
-          <input type="text" id="task-title" placeholder="O que precisa ser feito?" class="font-bold">
-          <textarea id="task-description" placeholder="Descrição (opcional)"></textarea>
-          <input type="date" id="task-date">
-          <div class="flex gap-2">
+          <input type="text" id="task-title" placeholder="O que precisa ser feito?" class="w-full bg-transparent border-b border-divider pb-2 mb-4 font-bold text-lg placeholder-neutral-400 focus:outline-none">
+
+          <textarea id="task-description" placeholder="Descrição (opcional)" class="w-full bg-transparent border border-divider rounded-lg p-3 mb-4 text-sm placeholder-neutral-400 focus:outline-none" rows="2"></textarea>
+
+          <input type="date" id="task-date" class="w-full bg-transparent border border-divider rounded-lg p-3 mb-4 text-sm">
+
+          <div class="flex gap-2 mb-2">
             <button type="button" data-prioridade="alta" class="flex-1 border border-divider rounded-lg py-2 text-xs">⭡ ALTA</button>
             <button type="button" data-prioridade="media" class="flex-1 border border-divider rounded-lg py-2 text-xs bg-accent">→ MÉDIA</button>
             <button type="button" data-prioridade="baixa" class="flex-1 border border-divider rounded-lg py-2 text-xs">⭣ BAIXA</button>
           </div>
-          <p id="prioridade-padrao"> PRIORIDADE: MÉDIA </p>
-          <button type="submit" id="btn-submit-task" class="w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs"> CRIAR TAREFA </button>
-          <button id="btn-delete-task" type="button" class="hidden w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs"> EXCLUIR </button>
+          <p id="prioridade-padrao" class="text-xs text-neutral-400 mb-4">PRIORIDADE: MÉDIA</p>
+
+          <button type="submit" id="btn-submit-task" class="w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs">CRIAR TAREFA</button>
+          <button id="btn-delete-task" type="button" class="hidden w-full font-bold bg-accent rounded-lg p-4 mb-3 text-xs">EXCLUIR</button>
         </form>
       </div>
     </div>

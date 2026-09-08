@@ -62,6 +62,14 @@ function formatDate(dateString) {
 const ui = {
   currentPage: 1,
 
+  showLoading() {
+    document.getElementById("loading-overlay").classList.remove("hidden");
+  },
+
+  hideLoading() {
+    document.getElementById("loading-overlay").classList.add("hidden");
+  },
+
   async testConnection() {
     const result = await api.test();
     document.getElementById("status").textContent = result.status;
@@ -98,8 +106,13 @@ const ui = {
 
       const checkbox = card.querySelector("input[type='checkbox']");
       checkbox.addEventListener("change", async () => {
-        await api.toggleTaskStatus(task.id);
-        this.loadTasks();
+        this.showLoading();
+        try {
+          await api.toggleTaskStatus(task.id);
+          this.loadTasks();
+        } finally {
+          this.hideLoading();
+        }
       });
 
       const article = card.querySelector("article");
@@ -111,32 +124,45 @@ const ui = {
   },
 
   async loadTasks(search = "", page = 1, append = false, filter = "") {
-    const taskList = document.getElementById("task-list");
+    this.showLoading();
+    try {
+      const taskList = document.getElementById("task-list");
 
-    if (!append) {
-      taskList.innerHTML = "<li>Carregando tarefas...</li>";
-    }
+      // antigo loading de tarefas, agora substituído por um spinner
+      // if (!append) {
+      //   taskList.innerHTML = "<li>Carregando tarefas...</li>";
+      // }
 
-    this.currentPage = page;
-    const result = await api.fetchTasks(search, page, 5, filter);
-    this.renderTasks(result.rows, append);
+      this.currentPage = page;
+      const result = await api.fetchTasks(search, page, 5, filter);
+      this.renderTasks(result.rows, append);
 
-    const loadMoreButton = document.getElementById("btn-load-more");
-    const totalLoaded = append
-      ? document.querySelectorAll("#task-list .task-card").length
-      : result.rows.length;
+      const loadMoreButton = document.getElementById("btn-load-more");
+      const totalLoaded = append
+        ? document.querySelectorAll("#task-list .task-card").length
+        : result.rows.length;
 
-    const countToday = document.getElementById("count-today");
-    countToday.textContent = result.counts.today;
-    const countPriority = document.getElementById("count-priority");
-    countPriority.textContent = result.counts.priority;
-    const countCompleted = document.getElementById("count-completed");
-    countCompleted.textContent = result.counts.completed;
+      // possível contador para versão web
+      const countToday = document.getElementById("count-today");
+      // countToday.textContent = result.counts.today;
+      const countPriority = document.getElementById("count-priority");
+      // countPriority.textContent = result.counts.priority;
+      const countCompleted = document.getElementById("count-completed");
+      // countCompleted.textContent = result.counts.completed;
 
-    if (totalLoaded >= result.count) {
-      loadMoreButton.classList.add("hidden");
-    } else {
-      loadMoreButton.classList.remove("hidden");
+      //contador mobile no header
+      const openCount = result.count - result.counts.completed;
+      document.getElementById("open-count").textContent = openCount;
+      document.getElementById("today-count-header").textContent =
+        result.counts.today;
+
+      if (totalLoaded >= result.count) {
+        loadMoreButton.classList.add("hidden");
+      } else {
+        loadMoreButton.classList.remove("hidden");
+      }
+    } finally {
+      this.hideLoading();
     }
   },
 
@@ -218,25 +244,30 @@ const ui = {
     const modal = document.getElementById("task-modal");
 
     form.addEventListener("submit", async (event) => {
-      event.preventDefault();
+      this.showLoading();
+      try {
+        event.preventDefault();
 
-      const taskData = {
-        title: document.getElementById("task-title").value,
-        description: document.getElementById("task-description").value,
-        due_date: document.getElementById("task-date").value,
-        priority: selectedPriority,
-      };
+        const taskData = {
+          title: document.getElementById("task-title").value,
+          description: document.getElementById("task-description").value,
+          due_date: document.getElementById("task-date").value,
+          priority: selectedPriority,
+        };
 
-      const editingId = modal.dataset.editingId;
+        const editingId = modal.dataset.editingId;
 
-      if (editingId) {
-        await api.updateTask(editingId, taskData);
-      } else {
-        await api.createTask(taskData);
+        if (editingId) {
+          await api.updateTask(editingId, taskData);
+        } else {
+          await api.createTask(taskData);
+        }
+
+        this.closeTaskModal();
+        this.loadTasks();
+      } finally {
+        this.hideLoading();
       }
-
-      this.closeTaskModal();
-      this.loadTasks();
     });
   },
 
@@ -245,15 +276,20 @@ const ui = {
     const modal = document.getElementById("task-modal");
 
     deleteButton.addEventListener("click", async () => {
-      const confirmDelete = confirm(
-        "Tem certeza que deseja excluir essa tarefa?",
-      );
-      if (!confirmDelete) return;
+      this.showLoading();
+      try {
+        const confirmDelete = confirm(
+          "Tem certeza que deseja excluir essa tarefa?",
+        );
+        if (!confirmDelete) return;
 
-      const id = modal.dataset.editingId;
-      await api.deleteTask(id);
-      this.closeTaskModal();
-      this.loadTasks();
+        const id = modal.dataset.editingId;
+        await api.deleteTask(id);
+        this.closeTaskModal();
+        this.loadTasks();
+      } finally {
+        this.hideLoading();
+      }
     });
   },
 

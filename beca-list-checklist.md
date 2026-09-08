@@ -72,7 +72,7 @@
 - [x] CRUD completo funcionando
 - [x] Checkbox concluir/desmarcar
 - [ ] Layout responsivo mobile first + paleta do tema
-- [ ] Loading em toda chamada ao backend
+- [x] Loading em toda chamada ao backend
 - [x] Modal único reaproveitado
 - [x] Sequelize criando as tabelas (não manual no phpMyAdmin)
 - [ ] Nomes em inglês (variáveis, funções, arquivos)
