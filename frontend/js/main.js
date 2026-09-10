@@ -3,12 +3,17 @@ import ui from "./ui.js";
 import { debounce } from "./debounce.js";
 
 const searchInput = document.getElementById("search-input");
-const debouncedSearch = debounce((texto) => {
-  ui.loadTasks(texto);
+const searchInputDesktop = document.getElementById("search-input-desktop");
+const debouncedSearch = debounce((text) => {
+  ui.loadTasks(text);
 }, 400);
+
 const loadMoreButton = document.getElementById("btn-load-more");
 
 searchInput.addEventListener("input", (event) => {
+  debouncedSearch(event.target.value);
+});
+searchInputDesktop.addEventListener("input", (event) => {
   debouncedSearch(event.target.value);
 });
 
@@ -20,6 +25,10 @@ ui.setupFilterButtons();
 
 document
   .getElementById("btn-new-task")
+  .addEventListener("click", () => ui.openTaskModal("create"));
+
+document
+  .getElementById("btn-new-task-desktop")
   .addEventListener("click", () => ui.openTaskModal("create"));
 
 document

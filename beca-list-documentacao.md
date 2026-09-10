@@ -430,18 +430,18 @@ A ferramenta **opencode** pode ser usada como apoio pontual durante o desenvolvi
 - [x] Setup mínimo e funcional dos dois projetos (`frontend` e `backend` rodando, comunicando entre si)
 - [x] CRUD completo de tarefas funcionando (criar, listar, editar, excluir)
 - [x] Checkbox de concluir/desmarcar tarefa
-- [ ] Layout responsivo, mobile first, com Tailwind (CDN) e paleta de cores do tema escuro
+- [x] Layout responsivo, mobile first, com Tailwind (CDN) e paleta de cores do tema escuro
 - [x] Loading visível em toda chamada ao backend
 - [x] Modal único reaproveitado para criar/editar tarefa
 - [x] Conexão do backend com o MySQL (XAMPP) via Sequelize funcionando, com as tabelas criadas pelo próprio Sequelize
-- [ ] Variáveis, funções e nomes de arquivos em inglês
+- [x] Variáveis, funções e nomes de arquivos em inglês
 
 ### Adicional
 
 - [x] Busca por título com debounce funcionando
 - [x] Paginação funcionando (frontend envia parâmetros, backend trata)
 - [x] Tarefas ordenadas da mais recente primeiro
-- [ ] Filtros por categoria (Todas/Hoje/Prioridade alta/Concluídas) com contadores
+- [x] Filtros por categoria (Todas/Hoje/Prioridade alta/Concluídas) com contadores
 - [x] Badge de tarefa atrasada implementado
 
 ---

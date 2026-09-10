@@ -71,8 +71,8 @@
 - [x] Frontend e backend rodando e comunicando
 - [x] CRUD completo funcionando
 - [x] Checkbox concluir/desmarcar
-- [ ] Layout responsivo mobile first + paleta do tema
+- [x] Layout responsivo mobile first + paleta do tema
 - [x] Loading em toda chamada ao backend
 - [x] Modal único reaproveitado
 - [x] Sequelize criando as tabelas (não manual no phpMyAdmin)
-- [ ] Nomes em inglês (variáveis, funções, arquivos)
+- [x] Nomes em inglês (variáveis, funções, arquivos)

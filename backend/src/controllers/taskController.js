@@ -65,12 +65,23 @@ class TaskController {
         },
       });
 
+      const startOfToday = new Date();
+      startOfToday.setUTCHours(0, 0, 0, 0);
+
+      const overdueCount = await Task.count({
+        where: {
+          due_date: { [Op.lt]: startOfToday },
+          completed: false,
+        },
+      });
+
       res.status(200).json({
         ...tasks,
         counts: {
           today: todayCount,
           priority: priorityCount,
           completed: completedCount,
+          overdue: overdueCount,
         },
       });
     } catch (error) {
