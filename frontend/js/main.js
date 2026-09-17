@@ -5,7 +5,7 @@ import { debounce } from "./debounce.js";
 const searchInput = document.getElementById("search-input");
 const searchInputDesktop = document.getElementById("search-input-desktop");
 const debouncedSearch = debounce((text) => {
-  ui.loadTasks(text);
+  ui.loadTasks(text, 1, false, ui.currentFilter);
 }, 400);
 
 const loadMoreButton = document.getElementById("btn-load-more");
@@ -36,5 +36,5 @@ document
   .addEventListener("click", () => ui.closeTaskModal());
 
 loadMoreButton.addEventListener("click", () => {
-  ui.loadTasks(searchInput.value, ui.currentPage + 1, true);
+  ui.loadTasks(searchInput.value, ui.currentPage + 1, true, ui.currentFilter);
 });

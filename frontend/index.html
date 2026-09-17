@@ -29,11 +29,11 @@
   <header class="flex divide-x divide-divider border-b border-divider  mb-4 md:hidden">
     <section class="flex-1 p-4">
       <h2 class="text-xs text-neutral-400">EM ABERTO</h2>
-      <p id="open-count" class="text-3xl font-bold">6</p>
+      <p id="open-count" class="text-3xl font-bold">--</p>
     </section>
     <section class="flex-1 p-4">
       <h2 class="text-xs text-neutral-400">PARA HOJE</h2>
-      <p id="today-count-header" class="text-3xl font-bold text-accent">1</p>
+      <p id="today-count-header" class="text-3xl font-bold text-accent">--</p>
     </section>
   </header>
 
@@ -83,7 +83,7 @@
           <button type="button" id="btn-close-modal" class="font-bold text-accent text-xs">FECHAR</button>
         </div>
         <form id="task-form">
-          <input type="text" id="task-title" placeholder="O que precisa ser feito?" class="w-full bg-transparent border-b border-divider pb-2 mb-4 font-bold text-lg placeholder-neutral-400 focus:outline-none">
+          <input type="text" id="task-title" placeholder="O que precisa ser feito?" required class="w-full bg-transparent border-b border-divider pb-2 mb-4 font-bold text-lg placeholder-neutral-400 focus:outline-none">
 
           <textarea id="task-description" placeholder="Descrição (opcional)" class="w-full bg-transparent border border-divider rounded-lg p-3 mb-4 text-sm placeholder-neutral-400 focus:outline-none" rows="2"></textarea>
 

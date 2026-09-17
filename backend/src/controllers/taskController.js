@@ -47,27 +47,38 @@ class TaskController {
       const endingDate = new Date();
       endingDate.setUTCHours(23, 59, 59, 999);
 
+      // contador de tarefas com data de vencimento para hoje
       const todayCount = await Task.count({
         where: {
           due_date: { [Op.gte]: startingDate, [Op.lte]: endingDate },
         },
       });
 
+      //contador de tarefas com prioridade alta
       const priorityCount = await Task.count({
         where: {
           priority: { [Op.eq]: "alta" },
         },
       });
 
+      //contador de tarefas concluídas
       const completedCount = await Task.count({
         where: {
           completed: { [Op.eq]: true },
         },
       });
 
+      // contador de tarefas não concluídas
+      const uncompletedCount = await Task.count({
+        where: {
+          completed: { [Op.eq]: false },
+        },
+      });
+
       const startOfToday = new Date();
       startOfToday.setUTCHours(0, 0, 0, 0);
 
+      //contador de tarefas com data de vencimento anterior a hoje e não concluídas
       const overdueCount = await Task.count({
         where: {
           due_date: { [Op.lt]: startOfToday },
@@ -75,13 +86,18 @@ class TaskController {
         },
       });
 
+      //contagem total de tarefas
+      const totalCount = await Task.count();
+
       res.status(200).json({
         ...tasks,
         counts: {
           today: todayCount,
           priority: priorityCount,
           completed: completedCount,
+          uncompleted: uncompletedCount,
           overdue: overdueCount,
+          total: totalCount,
         },
       });
     } catch (error) {

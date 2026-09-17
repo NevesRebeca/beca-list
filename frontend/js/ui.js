@@ -14,6 +14,12 @@ const priorityBadgeTexts = {
   baixa: "BAIXA",
 };
 
+const priorityColors = {
+  alta: "bg-accent-500",
+  media: "bg-accent-300",
+  baixa: "bg-neutral-400",
+};
+
 function isOverdue(task) {
   if (task.completed) return false;
   if (!task.due_date) return false;
@@ -61,6 +67,7 @@ function formatDate(dateString) {
 
 const ui = {
   currentPage: 1,
+  currentFilter: "",
 
   showLoading() {
     document.getElementById("loading-overlay").classList.remove("hidden");
@@ -86,21 +93,21 @@ const ui = {
       const card = document.createElement("li");
       card.innerHTML = `
  <article class="task-card bg-surface rounded-lg p-4 mb-4 border-r-4 border-accent-500 md:flex md:items-center md:justify-between md:border-r-0 md:border-l-4">
-    <div class="md:gap-4 md:flex-1">
+    <div class="md:gap-4 md:flex-1 md:min-w-0">
       <div class="flex justify-between">
-        <div class="flex gap-2">
+        <div class="flex gap-2 flex-1 min-w-0">
           <input type="checkbox" id="task-${task.id}" ${task.completed ? "checked" : ""}>
-          <strong class="${task.completed ? "line-through opacity-50" : ""}">${task.title}</strong>
+          <strong class="flex-1 min-w-0 line-clamp-1 ${task.completed ? "line-through opacity-50" : ""} ">${task.title}</strong>
         </div>
         <span class="md:hidden">${priorityIcons[task.priority]}</span>
       </div>
       <p class="line-clamp-1 text-neutral-400 ${task.completed ? "opacity-50" : ""}">${task.description || ""}</p>
     </div>
 
-    <footer class="flex gap-2 md:gap-3 md:items-center">
+    <footer class="flex mt-1 gap-2 md:gap-3 md:items-center">
       ${isOverdue(task) ? '<span class="rounded-full px-3 py-1 bg-accent text-xs">ATRASADA</span>' : ""}
       <span class="rounded-full px-3 py-1 bg-divider text-xs">${formatDate(task.due_date)}</span>
-      <span class="rounded-full px-3 py-1 bg-divider text-xs">${priorityBadgeTexts[task.priority]}</span>
+      <span class="rounded-full px-3 py-1 ${priorityColors[task.priority]} text-xs  text-bg ">${priorityBadgeTexts[task.priority]}</span>
       <span class="hidden md:inline">${priorityIcons[task.priority]}</span>
       <button type="button" class="hidden md:inline-block border border-divider rounded-lg px-4 py-2 text-xs font-bold btn-edit">EDITAR</button>
       <button type="button" class="hidden md:inline-block border border-accent text-accent rounded-lg px-4 py-2 text-xs font-bold btn-delete-card">EXCLUIR</button>
@@ -140,6 +147,11 @@ const ui = {
       const article = card.querySelector("article");
       article.addEventListener("click", (event) => {
         if (event.target.type === "checkbox") return;
+        if (event.target.closest("button")) return;
+
+        const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+        if (isDesktop) return;
+
         this.openTaskModal("edit", task);
       });
     });
@@ -171,14 +183,14 @@ const ui = {
       const countCompleted = document.getElementById("count-completed");
       const countOverdue = document.getElementById("count-overdue");
 
-      countAll.textContent = `· ${result.count}`;
+      countAll.textContent = `· ${result.counts.total}`;
       countToday.textContent = `· ${result.counts.today}`;
       countPriority.textContent = `· ${result.counts.priority}`;
       countCompleted.textContent = `· ${result.counts.completed}`;
       countOverdue.textContent = `${result.counts.overdue} ATRASADAS`;
 
       //contador mobile no header
-      const openCount = result.count - result.counts.completed;
+      const openCount = result.counts.uncompleted;
       document.getElementById("open-count").textContent = openCount;
       document.getElementById("today-count-header").textContent =
         result.counts.today;
@@ -332,6 +344,7 @@ const ui = {
         button.classList.add("bg-accent");
 
         const filter = button.dataset.filter;
+        this.currentFilter = filter;
         this.loadTasks("", 1, false, filter);
       });
     });

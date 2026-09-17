@@ -13,6 +13,11 @@ Task.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "O título da tarefa não pode estar vazio.",
+        },
+      },
     },
     description: {
       type: DataTypes.TEXT,
