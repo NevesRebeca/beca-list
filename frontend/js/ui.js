@@ -1,7 +1,11 @@
 import api from "./api.js";
 
+// ferramentas internas, não precisam ser acessadas em outros arquivos, então não são exportadas
+
+// muda -> prioridade padrão inicial
 let selectedPriority = "media";
 
+// dicionário de prioridades
 const priorityIcons = {
   alta: "⭡",
   media: "→",
@@ -20,6 +24,7 @@ const priorityColors = {
   baixa: "bg-neutral-400",
 };
 
+// verifica se a tarefa está atrasada
 function isOverdue(task) {
   if (task.completed) return false;
   if (!task.due_date) return false;
@@ -33,6 +38,7 @@ function isOverdue(task) {
   return dueDate < today;
 }
 
+// formata a data para exibição no card da tarefa
 function formatDate(dateString) {
   if (!dateString) return "Sem data";
 
@@ -66,9 +72,12 @@ function formatDate(dateString) {
 }
 
 const ui = {
+  // pra guardar a página atual, para que ao carregar mais tarefas, ele continue de onde parou
   currentPage: 1,
+  // pra guardar o filtro ativo, para que ao carregar mais tarefas, ele continue aplicando o filtro TIVEMOS PROBLEMAS
   currentFilter: "",
 
+  // loading
   showLoading() {
     document.getElementById("loading-overlay").classList.remove("hidden");
   },
@@ -77,18 +86,17 @@ const ui = {
     document.getElementById("loading-overlay").classList.add("hidden");
   },
 
-  async testConnection() {
-    const result = await api.test();
-    document.getElementById("status").textContent = result.status;
-  },
-
   async renderTasks(tasks, append = false) {
     const taskList = document.getElementById("task-list");
 
+    // se eu não cliquei em carregar mais em outras utilidades, ele apaga tudo, limpa a lista, e redesenha do zero com dados atualizados
+    // se append true, ele não apaga, apenas adiciona mais tarefas no final da lista
+    //LoadTasks é chamado com append true quando o usuário clica no botão "Carregar mais" -> consultar
     if (!append) {
       taskList.innerHTML = "";
     }
 
+    // template de cada card de tarefa
     tasks.forEach((task) => {
       const card = document.createElement("li");
       card.innerHTML = `
@@ -114,7 +122,7 @@ const ui = {
     </footer>
   </article>
 `;
-
+      // card na tela -> lista de tarefas
       taskList.appendChild(card);
 
       card.querySelector(".btn-edit").addEventListener("click", async () => {
@@ -144,6 +152,7 @@ const ui = {
         }
       });
 
+      // para abrir o modal de edição ao clicar no card, mas não no checkbox nem nos botões se for mobile. Desktop não abre o modal ao clicar no card, apenas nos botões de editar
       const article = card.querySelector("article");
       article.addEventListener("click", (event) => {
         if (event.target.type === "checkbox") return;
@@ -171,6 +180,7 @@ const ui = {
       const result = await api.fetchTasks(search, page, 5, filter);
       this.renderTasks(result.rows, append);
 
+      // botão de carregar mais tarefas
       const loadMoreButton = document.getElementById("btn-load-more");
       const totalLoaded = append
         ? document.querySelectorAll("#task-list .task-card").length
@@ -215,6 +225,7 @@ const ui = {
     const priorityButtons = document.querySelectorAll("[data-priority]");
     const deleteButton = document.getElementById("btn-delete-task");
 
+    // num tindi muito bem, mas tá bom
     if (mode === "edit" && taskData) {
       deleteButton.classList.remove("hidden");
       modalTitle.textContent = "EDITAR TAREFA";
@@ -237,6 +248,7 @@ const ui = {
         }
       });
 
+      // qual tarefa está sendo editada, pra quando clicar em salvar, ele saber qual atualizar
       modal.dataset.editingId = taskData.id;
     } else {
       deleteButton.classList.add("hidden");
@@ -279,6 +291,7 @@ const ui = {
     });
   },
 
+  // salva as alterações do formulário de criação/edição de tarefas
   setupTaskForm() {
     const form = document.getElementById("task-form");
     const modal = document.getElementById("task-modal");
@@ -286,6 +299,7 @@ const ui = {
     form.addEventListener("submit", async (event) => {
       this.showLoading();
       try {
+        // cancela o comportamento padrão do formulário, que é recarregar a página
         event.preventDefault();
 
         const taskData = {
@@ -333,6 +347,8 @@ const ui = {
     });
   },
 
+  // registra os eventos de clique nos botões de filtro
+  // TODAS, HOJE, PRIORIDADE ALTA, CONCLUÍDAS
   setupFilterButtons() {
     const filterButtons = document.querySelectorAll("[data-filter]");
 

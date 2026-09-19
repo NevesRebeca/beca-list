@@ -29,3 +29,46 @@ api.js: só sabe conversar com o backend. Não sabe nada sobre <div>, id, tela. 
 ui.js: só sabe mexer no HTML/DOM. Não sabe nada sobre fetch, URLs, backend. Recebe dados prontos e só decide "como colocar isso na tela";
 
 main.js: é o "maestro", importa o api.js e o ui.js, e conecta os dois — chama a função do api, pega o resultado, manda para a função do ui mostrar.
+
+TAILWIND:
+bg - background
+text - texto
+border - borda
+
+class="p-4"    /* padding em todos os lados */ 16px
+class="px-4"   /* padding só horizontal (esquerda+direita) */
+class="pb-24"  /* padding só na base */ 96px
+class="mb-4"   /* margin só na base */
+class="gap-4"  /* espaço entre itens de um flex/grid */
+
+class="flex items-center justify-between gap-4":
+flex → liga o modo flexbox (filhos ficam lado a lado, na horizontal, por padrão).
+items-center → alinha verticalmente pelo centro.
+justify-between → primeiro filho gruda numa ponta, último na outra, espaço distribuído entre eles.
+gap-4 → espaço fixo entre os itens.
+
+responsividade
+class="md:hidden"      /* esconde a partir do desktop */
+class="hidden md:flex" /* começa escondido, aparece como flex no desktop */
+class="md:max-w-md"    /* só limita largura no desktop */
+
+visibilidade
+class="hidden"        /* display: none — nem ocupa espaço */
+class="hidden md:inline" /* invisível no mobile, aparece como inline no desktop */
+
+posicionamento
+class="fixed inset-0 z-40"
+fixed → tira o elemento do fluxo normal da página, "prende" ele na tela (não se move com o scroll).
+inset-0 → um atalho que equivale a top-0 right-0 bottom-0 left-0 juntos — cola nas 4 bordas.
+z-40 → controla a "camada" de empilhamento (quem fica visualmente por cima de quem, quando elementos se sobrepõem).
+
+bordas
+lass="border-b border-divider"      /* borda só embaixo, cor divider */
+class="rounded-t-2xl"                /* arredonda só os cantos de cima */
+class="rounded-full"                 /* arredonda tudo (formato pílula/círculo) */
+class="divide-x divide-divider"      /* linha vertical automática entre filhos */
+
+fonte
+class="text-xs"       /* tamanho pequeno */
+class="text-3xl"      /* tamanho grande */
+class="font-bold"     /* peso da fonte */

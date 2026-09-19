@@ -40,60 +40,60 @@
 
 ## Concluir/desmarcar tarefa
 
-- [ ] Clicar no checkbox marca como concluída (título riscado, esmaecido)
-- [ ] Clicar de novo desmarca (volta ao normal)
-- [ ] Clicar no checkbox NÃO abre o modal de edição
-- [ ] Clicar em qualquer outra parte do card SIM abre o modal
+- [x] Clicar no checkbox marca como concluída (título riscado, esmaecido)
+- [x] Clicar de novo desmarca (volta ao normal)
+- [x] Clicar no checkbox NÃO abre o modal de edição
+- [x] Clicar em qualquer outra parte do card SIM abre o modal
 
 ## Excluir tarefa
 
-- [ ] Botão excluir (dentro do modal, mobile) pede confirmação
-- [ ] Botão excluir (na linha, desktop) pede confirmação
-- [ ] Cancelar a confirmação → tarefa continua existindo
-- [ ] Confirmar → tarefa some da lista e do banco
+- [x] Botão excluir (dentro do modal, mobile) pede confirmação
+- [x] Botão excluir (na linha, desktop) pede confirmação
+- [x] Cancelar a confirmação → tarefa continua existindo
+- [x] Confirmar → tarefa some da lista e do banco
 
 ## Busca
 
-- [ ] Digitar no campo de busca filtra por título após uma pausa (debounce)
-- [ ] Busca funciona igual no campo mobile e no campo desktop
-- [ ] Buscar um termo sem resultado → lista fica vazia, sem erro
-- [ ] Limpar a busca → volta a mostrar todas as tarefas
+- [x] Digitar no campo de busca filtra por título após uma pausa (debounce)
+- [x] Busca funciona igual no campo mobile e no campo desktop
+- [x] Buscar um termo sem resultado → lista fica vazia, sem erro
+- [x] Limpar a busca → volta a mostrar todas as tarefas
 
 ## Paginação
 
-- [ ] Com mais de 5 tarefas, botão "Carregar mais" aparece
-- [ ] Clicar nele acrescenta as próximas tarefas (sem apagar as já visíveis)
-- [ ] Quando não há mais tarefas, o botão some
-- [ ] Trocar de filtro ou busca reseta a paginação para a primeira página
+- [x] Com mais de 5 tarefas, botão "Carregar mais" aparece
+- [x] Clicar nele acrescenta as próximas tarefas (sem apagar as já visíveis)
+- [x] Quando não há mais tarefas, o botão some
+- [x] Trocar de filtro ou busca reseta a paginação para a primeira página
 
-## Filtros e contadores (já encontrei erro nos badges superiores :/)
+## Filtros e contadores
 
-- [ ] Chip "Todas" mostra tudo
-- [ ] Chip "Hoje" mostra só tarefas de hoje
-- [ ] Chip "Prioridade alta" mostra só as de prioridade alta
-- [ ] Chip "Concluídas" mostra só as concluídas
-- [ ] Alternar entre chips troca o destaque visual corretamente
-- [ ] Header mobile ("Em aberto" / "Para hoje") mostra números corretos
-- [ ] Header desktop ("Tarefas · N em aberto") mostra número correto
-- [ ] Contadores dos chips no desktop (Todas · N, Hoje · N, etc.) batem com a lista
-- [ ] "N Atrasadas" no desktop bate com a quantidade real de atrasadas
+- [x] Chip "Todas" mostra tudo
+- [x] Chip "Hoje" mostra só tarefas de hoje
+- [x] Chip "Prioridade alta" mostra só as de prioridade alta
+- [x] Chip "Concluídas" mostra só as concluídas
+- [x] Alternar entre chips troca o destaque visual corretamente
+- [x] Header mobile ("Em aberto" / "Para hoje") mostra números corretos
+- [x] Header desktop ("Tarefas · N em aberto") mostra número correto
+- [x] Contadores dos chips no desktop (Todas · N, Hoje · N, etc.) batem com a lista
+- [x] "N Atrasadas" no desktop bate com a quantidade real de atrasadas
 
 ## Loading
 
-- [ ] Loading aparece ao carregar a lista
-- [ ] Loading aparece ao criar/editar/excluir/concluir uma tarefa
-- [ ] Loading sempre some depois (nunca fica travado na tela)
+- [x] Loading aparece ao carregar a lista
+- [x] Loading aparece ao criar/editar/excluir/concluir uma tarefa
+- [x] Loading sempre some depois (nunca fica travado na tela)
 
 ## Responsividade
 
-- [ ] Redimensionar a janela de mobile para desktop e vice-versa não quebra nada
-- [ ] Modal muda de "bottom sheet" (mobile) para "centralizado" (desktop)
-- [ ] Cards mudam de "empilhado" (mobile) para "linha horizontal" (desktop)
-- [ ] Botão fixo "Nova tarefa" some no desktop (já existe no header)
+- [x] Redimensionar a janela de mobile para desktop e vice-versa não quebra nada
+- [x] Modal muda de "bottom sheet" (mobile) para "centralizado" (desktop)
+- [x] Cards mudam de "empilhado" (mobile) para "linha horizontal" (desktop)
+- [x] Botão fixo "Nova tarefa" some no desktop (já existe no header)
 
 ## Casos extremos
 
-- [ ] Título bem longo não quebra o layout do card
-- [ ] Descrição bem longa é cortada (não estica o card)
+- [x] Título bem longo não quebra o layout do card
+- [x] Descrição bem longa é cortada (não estica o card)
 - [ ] Criar várias tarefas rápido, sem esperar uma terminar, não gera comportamento estranho
-- [ ] Recarregar a página (F5) com o modal aberto — comportamento aceitável (fecha ou mantém, sem travar)
+- [x] Recarregar a página (F5) com o modal aberto — comportamento aceitável (fecha ou mantém, sem travar)

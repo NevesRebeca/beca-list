@@ -1,3 +1,4 @@
+// tradução do valor do front ("today") para um pedaço de URL para o back ("&due=today")
 const filterParams = {
   all: "",
   today: "&due=today",
@@ -6,6 +7,7 @@ const filterParams = {
 };
 
 const api = {
+  // teste
   async test() {
     // caso algum erro na requisição, o try catch vai capturar e exibir no console
     try {

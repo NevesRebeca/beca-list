@@ -35,7 +35,7 @@ Task.init(
     },
   },
   {
-    sequelize: sequelize,
+    sequelize: sequelize, //conecta esse modelo com o banco já criado em database.js
   },
 );
 

@@ -6,31 +6,37 @@ class TaskController {
     try {
       const { search, status, priority, due } = req.query;
 
+      // paginação
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 10;
-      const offset = (page - 1) * limit;
+      const offset = (page - 1) * limit; // registro pulados
 
+      // obj where
       const where = {};
 
       if (search) {
         where.title = { [Op.like]: `%${search}%` };
       }
 
+      // filtros tarefas completas
       if (status === "completed") {
         where.completed = true;
       }
 
+      // filtro prioridade alta
       if (priority) {
         where.priority = priority;
       }
 
+      // filtro tarefas de hoje
       if (due === "today") {
         const startingDate = new Date();
-        startingDate.setUTCHours(0, 0, 0, 0);
+        startingDate.setUTCHours(0, 0, 0, 0); // início do dia
 
         const endingDate = new Date();
-        endingDate.setUTCHours(23, 59, 59, 999);
+        endingDate.setUTCHours(23, 59, 59, 999); //fim do dia
 
+        // tive problemas com isso, essa foi a solução
         where.due_date = { [Op.gte]: startingDate, [Op.lte]: endingDate };
       }
 
@@ -40,6 +46,8 @@ class TaskController {
         where,
         order: [["createdAt", "DESC"]],
       });
+
+      // contadores
 
       const startingDate = new Date();
       startingDate.setUTCHours(0, 0, 0, 0);
@@ -89,6 +97,7 @@ class TaskController {
       //contagem total de tarefas
       const totalCount = await Task.count();
 
+      // passando pro front
       res.status(200).json({
         ...tasks,
         counts: {
