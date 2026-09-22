@@ -1,0 +1,25 @@
+erro:
+quando cria uma nova tarefa no filtro hoje, a listagem após criar lista tarefas que nao é de hoje (coloquei sem data)
+quando clicar nos filtros, limpar o input de busca
+
+
+melhoria:
+geral:
+- tirar seta
+- arrumar cor das badges de prioridade no modal
+- limite caracteres campos de texto (titulo e descrição)
+- tudo que nao é usado deve ser descartado
+
+back:
+- criar um .env.example
+- no createTask 
+- startingDate e endingDate: criar um arquivo em utils que seja reaproveitavel (tem algo parecido no front)
+
+front:
+- buscar por titulo apenas, descrição não funciona (mudar placeholder)
+- identa certo esse .html
+- const da url do back
+- remove os filtros vazios da query string de listagem
+- nao use return desnecessariamente (exemplo toggleTaskStatus)
+- faltou loading para update, ver se tem em mais
+- testar os alertas de erro

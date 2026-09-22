@@ -69,6 +69,7 @@ const api = {
         body: JSON.stringify(taskData),
       });
     } catch (error) {
+      console.log({ error });
       alert("Erro ao atualizar tarefa");
       throw error;
     }

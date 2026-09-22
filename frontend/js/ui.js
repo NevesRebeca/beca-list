@@ -312,13 +312,20 @@ const ui = {
         const editingId = modal.dataset.editingId;
 
         if (editingId) {
+          // try {
+          console.log("editingId", editingId);
           await api.updateTask(editingId, taskData);
+          // } catch (error) {
+          //   console.log({ error });
+          //   alert("Erro ao atualizar tarefa");
+          //   throw error;
+          // }
         } else {
           await api.createTask(taskData);
         }
 
         this.closeTaskModal();
-        this.loadTasks();
+        this.loadTasks("", 1, false, this.currentFilter);
       } finally {
         this.hideLoading();
       }
@@ -358,6 +365,9 @@ const ui = {
         filterButtons.forEach((b) => b.classList.add("bg-divider"));
         button.classList.remove("bg-divider");
         button.classList.add("bg-accent");
+
+        document.getElementById("search-input").value = "";
+        document.getElementById("search-input-desktop").value = "";
 
         const filter = button.dataset.filter;
         this.currentFilter = filter;
