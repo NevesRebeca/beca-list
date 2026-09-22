@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config.js";
+
 // tradução do valor do front ("today") para um pedaço de URL para o back ("&due=today")
 const filterParams = {
   all: "",
@@ -11,7 +13,7 @@ const api = {
   async test() {
     // caso algum erro na requisição, o try catch vai capturar e exibir no console
     try {
-      const response = await fetch(`http://localhost:3000/ping`);
+      const response = await fetch(`${API_BASE_URL}/ping`);
       return await response.json(); // fazer a conversão do formato json para o objeto JS
     } catch (error) {
       alert("Erro no teste");
@@ -21,7 +23,7 @@ const api = {
 
   async fetchTasks(search = "", page = 1, limit = 5, filter = "") {
     try {
-      const url = `http://localhost:3000/tasks?search=${search}&page=${page}&limit=${limit}${filterParams[filter] || ""}`;
+      const url = `${API_BASE_URL}/tasks?search=${search}&page=${page}&limit=${limit}${filterParams[filter] || ""}`;
       const response = await fetch(url);
       return await response.json();
     } catch (error) {
@@ -32,7 +34,7 @@ const api = {
 
   async createTask(taskData) {
     try {
-      const response = await fetch(`http://localhost:3000/tasks`, {
+      const response = await fetch(`${API_BASE_URL}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +50,7 @@ const api = {
 
   async toggleTaskStatus(id) {
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}/toggle`, {
+      const response = await fetch(`${API_BASE_URL}/tasks/${id}/toggle`, {
         method: "PUT",
       });
       return await response.json();
@@ -60,7 +62,7 @@ const api = {
 
   async updateTask(id, taskData) {
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -68,6 +70,7 @@ const api = {
 
         body: JSON.stringify(taskData),
       });
+      return await response.json();
     } catch (error) {
       console.log({ error });
       alert("Erro ao atualizar tarefa");
@@ -77,7 +80,7 @@ const api = {
 
   async deleteTask(id) {
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
         method: "DELETE",
       });
     } catch (error) {

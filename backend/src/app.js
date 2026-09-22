@@ -4,7 +4,12 @@ import routes from "./routes/taskRoutes.js";
 
 const app = express(); // cria o servidor express
 
-app.use(cors()); // habilita o CORS para permitir requisições de diferentes origens
+const allowedOrigins = [
+  "http://127.0.0.1:5500",
+  "https://SEU-FRONTEND.vercel.app",
+];
+
+app.use(cors({ origin: allowedOrigins })); // habilita o CORS para permitir requisições das origens que foram liberadas
 app.use(express.json()); // express entende o body em json
 
 // teste

@@ -6,11 +6,15 @@ const dbport = process.env.DB_PORT;
 const database = process.env.DB_NAME;
 const userName = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
+const useSSL = process.env.DB_SSL === "true";
 
 const sequelize = new Sequelize(database, userName, password, {
   host: dbhost,
   port: dbport,
   dialect: "mysql",
+  dialectOptions: useSSL
+    ? { ssl: { require: true, rejectUnauthorized: false } }
+    : {},
 });
 
 try {
