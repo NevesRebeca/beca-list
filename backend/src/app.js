@@ -6,7 +6,7 @@ const app = express(); // cria o servidor express
 
 const allowedOrigins = [
   "http://127.0.0.1:5500",
-  "https://SEU-FRONTEND.vercel.app",
+  "https://beca-list.vercel.app/",
 ];
 
 app.use(cors({ origin: allowedOrigins })); // habilita o CORS para permitir requisições das origens que foram liberadas
