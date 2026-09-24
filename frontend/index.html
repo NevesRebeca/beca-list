@@ -49,7 +49,7 @@
 
     <div class="flex items-center gap-4">
 
-      <input type="search" id="search-input-desktop" placeholder="Buscar título ou descrição" class="bg-transparent border border-divider rounded-lg px-4 py-2 text-sm placeholder-neutral-400 w-96">
+      <input type="search" id="search-input-desktop" placeholder="Buscar por título" class="bg-transparent border border-divider rounded-lg px-4 py-2 text-sm placeholder-neutral-400 w-96">
 
       <button type="button" id="btn-new-task-desktop" class="bg-accent rounded-lg px-4 py-2 text-xs font-bold">
         NOVA TAREFA +
@@ -60,15 +60,31 @@
   <main class="px-4 pb-24 md:pb-6">
     <section class="mb-4 md:hidden">
       <form>
-        <input type="search" id="search-input" placeholder="Buscar título ou descrição" class="w-full bg-transparent border border-divider rounded-full px-4 py-3 text-sm placeholder-neutral-400">
+        <input type="search" id="search-input" placeholder="Buscar por título" class="w-full bg-transparent border border-divider rounded-full px-4 py-3 text-sm placeholder-neutral-400">
       </form>
     </section>
     <nav class="mb-2 md:flex md:items-center md:justify-between">
       <ul class="flex gap-2 overflow-x-auto pb-2">
-        <li><button type="button" data-filter="all" class="whitespace-nowrap rounded-full px-3 py-1 bg-accent text-xs">TODAS <span id="count-all" class="hidden md:inline"></span></button></li>
-        <li><button type="button" data-filter="today" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">HOJE <span id="count-today" class="hidden md:inline"></span></button></li>
-        <li><button type="button" data-filter="priority" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">PRIORIDADE ALTA <span id="count-priority" class="hidden md:inline"></span></button></li>
-        <li><button type="button" data-filter="completed" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">CONCLUÍDAS <span id="count-completed" class="hidden md:inline"></span></button></li>
+        <li>
+          <button type="button" data-filter="all" class="whitespace-nowrap rounded-full px-3 py-1 bg-accent text-xs">TODAS
+            <span id="count-all" class="hidden md:inline"></span>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-filter="today" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">HOJE
+            <span id="count-today" class="hidden md:inline"></span>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-filter="priority" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">PRIORIDADE ALTA
+            <span id="count-priority" class="hidden md:inline"></span>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-filter="completed" class="whitespace-nowrap rounded-full px-3 py-1 bg-divider text-xs">CONCLUÍDAS
+            <span id="count-completed" class="hidden md:inline"></span>
+          </button>
+        </li>
       </ul>
       <span id="count-overdue" class="hidden md:inline text-accent text-xs"></span>
     </nav>
@@ -83,9 +99,9 @@
           <button type="button" id="btn-close-modal" class="font-bold text-accent text-xs">FECHAR</button>
         </div>
         <form id="task-form">
-          <input type="text" id="task-title" placeholder="O que precisa ser feito?" required class="w-full bg-transparent border-b border-divider pb-2 mb-4 font-bold text-lg placeholder-neutral-400 focus:outline-none">
+          <input type="text" maxlength="50" id="task-title" placeholder="O que precisa ser feito?" required class="w-full bg-transparent border-b border-divider pb-2 mb-4 font-bold text-lg placeholder-neutral-400 focus:outline-none">
 
-          <textarea id="task-description" placeholder="Descrição (opcional)" class="w-full bg-transparent border border-divider rounded-lg p-3 mb-4 text-sm placeholder-neutral-400 focus:outline-none" rows="2"></textarea>
+          <textarea id="task-description" maxlength="200" placeholder="Descrição (opcional)" class="w-full bg-transparent border border-divider rounded-lg p-3 mb-4 text-sm placeholder-neutral-400 focus:outline-none" rows="2"></textarea>
 
           <input type="date" id="task-date" class="w-full bg-transparent border border-divider rounded-lg p-3 mb-4 text-sm">
 
