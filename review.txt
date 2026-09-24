@@ -6,20 +6,21 @@ quando clicar nos filtros, limpar o input de busca
 melhoria:
 geral:
 - tirar seta
-- arrumar cor das badges de prioridade no modal
+- arrumar cor das badges de prioridade no modal (adicionar as cores padrões por tiop de prioridade)
 - limite caracteres campos de texto (titulo e descrição)
 - tudo que nao é usado deve ser descartado
 
 back:
-- criar um .env.example
+- criar um .env.example OK
 - no createTask 
-- startingDate e endingDate: criar um arquivo em utils que seja reaproveitavel (tem algo parecido no front)
+- startingDate e endingDate: criar um arquivo em utils que seja reaproveitavel (tem algo parecido no front) OK
 
 front:
 - buscar por titulo apenas, descrição não funciona (mudar placeholder)
 - identa certo esse .html
-- const da url do back
+- const da url do back (ok) 
 - remove os filtros vazios da query string de listagem
 - nao use return desnecessariamente (exemplo toggleTaskStatus)
 - faltou loading para update, ver se tem em mais
 - testar os alertas de erro
+- ver reaproveitáveis

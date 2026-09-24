@@ -1,5 +1,6 @@
-import { Sequelize, Op } from "sequelize";
+import { Op } from "sequelize";
 import Task from "../models/Task.js";
+import { getTodayRange } from "../utils/dateRange.js";
 
 class TaskController {
   static async getTask(req, res) {
@@ -30,13 +31,7 @@ class TaskController {
 
       // filtro tarefas de hoje
       if (due === "today") {
-        const startingDate = new Date();
-        startingDate.setUTCHours(0, 0, 0, 0); // início do dia
-
-        const endingDate = new Date();
-        endingDate.setUTCHours(23, 59, 59, 999); //fim do dia
-
-        // tive problemas com isso, essa foi a solução
+        const { startingDate, endingDate } = getTodayRange();
         where.due_date = { [Op.gte]: startingDate, [Op.lte]: endingDate };
       }
 
@@ -49,11 +44,7 @@ class TaskController {
 
       // contadores
 
-      const startingDate = new Date();
-      startingDate.setUTCHours(0, 0, 0, 0);
-
-      const endingDate = new Date();
-      endingDate.setUTCHours(23, 59, 59, 999);
+      const { startingDate, endingDate } = getTodayRange();
 
       // contador de tarefas com data de vencimento para hoje
       const todayCount = await Task.count({
@@ -83,13 +74,9 @@ class TaskController {
         },
       });
 
-      const startOfToday = new Date();
-      startOfToday.setUTCHours(0, 0, 0, 0);
-
-      //contador de tarefas com data de vencimento anterior a hoje e não concluídas
       const overdueCount = await Task.count({
         where: {
-          due_date: { [Op.lt]: startOfToday },
+          due_date: { [Op.lt]: startingDate },
           completed: false,
         },
       });

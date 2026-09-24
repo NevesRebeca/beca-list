@@ -6,11 +6,11 @@ import api from "./api.js";
 let selectedPriority = "media";
 
 // dicionário de prioridades
-const priorityIcons = {
-  alta: "⭡",
-  media: "→",
-  baixa: "⭣",
-};
+// const priorityIcons = {
+//   alta: "⭡",
+//   media: "→",
+//   baixa: "⭣",
+// };
 
 const priorityBadgeTexts = {
   alta: "ALTA",
@@ -107,7 +107,6 @@ const ui = {
           <input type="checkbox" id="task-${task.id}" ${task.completed ? "checked" : ""}>
           <strong class="flex-1 min-w-0 line-clamp-1 ${task.completed ? "line-through opacity-50" : ""} ">${task.title}</strong>
         </div>
-        <span class="md:hidden">${priorityIcons[task.priority]}</span>
       </div>
       <p class="line-clamp-1 text-neutral-400 ${task.completed ? "opacity-50" : ""}">${task.description || ""}</p>
     </div>
@@ -116,7 +115,6 @@ const ui = {
       ${isOverdue(task) ? '<span class="rounded-full px-3 py-1 bg-accent text-xs">ATRASADA</span>' : ""}
       <span class="rounded-full px-3 py-1 bg-divider text-xs">${formatDate(task.due_date)}</span>
       <span class="rounded-full px-3 py-1 ${priorityColors[task.priority]} text-xs  text-bg ">${priorityBadgeTexts[task.priority]}</span>
-      <span class="hidden md:inline">${priorityIcons[task.priority]}</span>
       <button type="button" class="hidden md:inline-block border border-divider rounded-lg px-4 py-2 text-xs font-bold btn-edit">EDITAR</button>
       <button type="button" class="hidden md:inline-block border border-accent text-accent rounded-lg px-4 py-2 text-xs font-bold btn-delete-card">EXCLUIR</button>
     </footer>
@@ -378,3 +376,6 @@ const ui = {
 };
 
 export default ui;
+
+//  <!-- <span class="md:hidden">${priorityIcons[task.priority]}</span> -->
+// <!-- <span class="hidden md:inline">${priorityIcons[task.priority]}</span> -->
